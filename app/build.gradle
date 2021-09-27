@@ -1,0 +1,117 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+android {
+    compileSdkVersion build_version.target_sdk
+
+    defaultConfig {
+        applicationId app_info.applicationID
+        minSdkVersion build_version.min_sdk
+        targetSdkVersion build_version.target_sdk
+        versionCode app_info.version_code
+        versionName app_info.version_name
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    /*Signed APK Configurations*/
+    signingConfigs {
+        releaseConfig {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        /*Debug Build Variant*/
+        debug {
+            applicationIdSuffix ".debug"
+        }
+        /*Release Build Variant*/
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.releaseConfig
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    /*Default Flavor*/
+    flavorDimensions "default"
+    productFlavors {
+        /*Development Flavor*/
+        production {
+            buildConfigField "String", "BASE_URL", server_config.base_url
+            signingConfig signingConfigs.releaseConfig
+        }
+    }
+    /*APK Name Generator*/
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "$app_info.applicationName - v${variant.versionName}.apk"
+        }
+    }
+    /*Java Compile Version*/
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    /*Kotlin JVM Version*/
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    /*Enable View Binding & Data Binding*/
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+}
+
+dependencies {
+    /*Android Kotlin Support Library*/
+    implementation 'androidx.core:core-ktx:1.6.0'
+    /*Android UI Support Libraries*/
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
+    /*Navigation Components Support Library*/
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    /*View Model Support Library*/
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    /*Live Data Support Library*/
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    /*Kotlin Coroutines Support Library*/
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1'
+    /*Hilt Support Library*/
+    implementation 'com.google.dagger:hilt-android:2.38.1'
+    kapt 'com.google.dagger:hilt-android-compiler:2.38.1'
+    /*Gson Support Library*/
+    implementation 'com.google.code.gson:gson:2.8.8'
+    /*Retrofit Network Support Library*/
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
+    /*Room Database Support Library*/
+    implementation 'androidx.room:room-runtime:2.3.0'
+    kapt 'androidx.room:room-compiler:2.3.0'
+    /*Glide Image Loading Support Library*/
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
+    /*Unit Testing Support Libraries*/
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}

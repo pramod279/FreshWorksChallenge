@@ -1,2 +1,2 @@
-# FreshWorksChallenge
-Freshworks Challenge by Pramod Selvaraj
+# FreshWorks Challenge
+FreshWorks Challenge by Pramod Selvaraj
