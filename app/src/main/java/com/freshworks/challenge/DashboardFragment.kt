@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.freshworks.challenge.adapers.FAVOURITES_PAGE_INDEX
 import com.freshworks.challenge.adapers.TRENDING_PAGE_INDEX
 import com.freshworks.challenge.adapers.TabsPagerAdapter
-import com.freshworks.challenge.databinding.FragmentViewPagerBinding
+import com.freshworks.challenge.databinding.FragmentDashboardBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -24,7 +24,7 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentViewPagerBinding.inflate(inflater, container, false)
+        val binding = FragmentDashboardBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         val tabLayout = binding.tabs
