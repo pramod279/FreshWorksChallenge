@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
 }
 
 def keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -10,14 +9,14 @@ def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
-    compileSdkVersion build_version.target_sdk
+    compileSdkVersion buildVersion.targetSdk
 
     defaultConfig {
-        applicationId app_info.applicationID
-        minSdkVersion build_version.min_sdk
-        targetSdkVersion build_version.target_sdk
-        versionCode app_info.version_code
-        versionName app_info.version_name
+        applicationId appInfo.applicationID
+        minSdkVersion buildVersion.minSdk
+        targetSdkVersion buildVersion.targetSdk
+        versionCode appInfo.versionCode
+        versionName appInfo.versionName
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -53,14 +52,14 @@ android {
     productFlavors {
         /*Development Flavor*/
         production {
-            buildConfigField "String", "BASE_URL", server_config.base_url
+            buildConfigField "String", "BASE_URL", serverConfig.baseUrl
             signingConfig signingConfigs.releaseConfig
         }
     }
     /*APK Name Generator*/
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "$app_info.applicationName - v${variant.versionName}.apk"
+            outputFileName = "$appInfo.applicationName - v${variant.versionName}.apk"
         }
     }
     /*Java Compile Version*/
@@ -95,9 +94,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     /*Kotlin Coroutines Support Library*/
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1'
-    /*Hilt Support Library*/
-    implementation 'com.google.dagger:hilt-android:2.38.1'
-    kapt 'com.google.dagger:hilt-android-compiler:2.38.1'
+    /*Paging Support Library*/
+    implementation 'androidx.paging:paging-runtime-ktx:3.0.1'
+    /*Koin Dependency Injection Support Library*/
+    implementation 'io.insert-koin:koin-android:3.1.2'
     /*Gson Support Library*/
     implementation 'com.google.code.gson:gson:2.8.8'
     /*Retrofit Network Support Library*/

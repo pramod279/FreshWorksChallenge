@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil.setContentView
 import com.freshworks.challenge.databinding.ActivityDashboardBinding
-import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * @Author: Pramod Selvaraj
@@ -12,7 +11,6 @@ import dagger.hilt.android.AndroidEntryPoint
  *
  * Dashboard Activity ==> Initial Landing Screen
  */
-@AndroidEntryPoint
 class DashboardActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

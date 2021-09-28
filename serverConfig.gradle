@@ -1,10 +1,10 @@
 /**
  * This Gradle Contains The Server Configurations & URLs
  */
-def server_config = [:]
+def serverConfig = [:]
 
 /**
  * FreshWorks Challenge Server Configuration
  */
-server_config.base_url = "\"https://api.giphy.com/v1/gifs/\""
-ext.server_config = server_config
+serverConfig.baseUrl = "\"https://api.giphy.com/v1/gifs/\""
+ext.serverConfig = serverConfig

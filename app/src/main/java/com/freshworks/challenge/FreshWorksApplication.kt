@@ -1,7 +1,6 @@
 package com.freshworks.challenge
 
 import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
 
 /**
  * @Author: Pramod Selvaraj
@@ -9,7 +8,6 @@ import dagger.hilt.android.HiltAndroidApp
  *
  * FreshWorks Challenge Application Class
  */
-@HiltAndroidApp
 class FreshWorksApplication : Application() {
     override fun onCreate() {
         super.onCreate()
