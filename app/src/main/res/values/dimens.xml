@@ -11,11 +11,13 @@
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_extra_small">4dp</dimen>
 
-    <dimen name="plant_item_image_height">95dp</dimen>
+    <dimen name="giphy_item_image_width">180dp</dimen>
+    <dimen name="giphy_item_image_height">180dp</dimen>
+    <dimen name="giphy_item_max_height">300dp</dimen>
 
     <dimen name="card_side_margin">12dp</dimen>
     <dimen name="card_bottom_margin">26dp</dimen>
-    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_elevation">6dp</dimen>
     <dimen name="card_corner_radius">12dp</dimen>
 
     <!-- elevation for Plant Detail toolbar - used to convert to pixels when hiding/showing -->

@@ -3,21 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvSearchHolder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_normal"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <SearchView
+                android:id="@+id/svGifs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:iconifiedByDefault="false"
+                android:queryHint="@string/hint_search_gif" />
+        </androidx.cardview.widget.CardView>
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_giphy"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingStart="@dimen/card_side_margin"
-            android:paddingTop="@dimen/header_margin"
-            android:paddingEnd="@dimen/card_side_margin"
+            android:id="@+id/rvGiphy"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="@dimen/margin_normal"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cvSearchHolder"
             app:spanCount="@integer/grid_columns"
             tools:context=".DashboardActivity"
-            tools:listitem="@layout/list_item_giphy" />
-    </FrameLayout>
+            tools:listitem="@layout/list_item_giphy_view" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

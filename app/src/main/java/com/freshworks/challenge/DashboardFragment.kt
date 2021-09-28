@@ -19,14 +19,13 @@ import com.google.android.material.tabs.TabLayoutMediator
  * Dashboard Fragment ==> Initialise View Pager & Tabs Layout
  */
 class DashboardFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-
         val tabLayout = binding.tabs
         val viewPager = binding.viewPager
 
@@ -39,14 +38,16 @@ class DashboardFragment : Fragment() {
             tab.setIcon(getTabIcon(position))
         }.attach()
 
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+
         return binding.root
     }
 
     /*Function for Setting Tab Title*/
     private fun getTabTitle(position: Int): String {
         return when (position) {
-            TRENDING_PAGE_INDEX -> getString(R.string.tab_title_trending)
-            FAVOURITES_PAGE_INDEX -> getString(R.string.tab_title_favourites)
+            TRENDING_PAGE_INDEX -> getString(R.string.tab_trending)
+            FAVOURITES_PAGE_INDEX -> getString(R.string.tab_favourites)
             else -> throw IndexOutOfBoundsException()
         }
     }
