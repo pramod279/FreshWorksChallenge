@@ -1,9 +1,9 @@
-package com.freshworks.challenge.adapers
+package com.freshworks.challenge.views.dashboard.adapers
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.freshworks.challenge.FavouritesFragment
-import com.freshworks.challenge.TrendingFragment
+import com.freshworks.challenge.views.favourites.FavouritesFragment
+import com.freshworks.challenge.views.trending.TrendingFragment
 
 const val TRENDING_PAGE_INDEX = 0
 const val FAVOURITES_PAGE_INDEX = 1

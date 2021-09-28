@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/dashboard_fragment"
-        android:name="com.freshworks.challenge.DashboardFragment"
+        android:name="com.freshworks.challenge.views.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard">
 
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.freshworks.challenge.TrendingFragment"
+        android:name="com.freshworks.challenge.views.trending.TrendingFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_trending">
 
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.freshworks.challenge.FavouritesFragment"
+        android:name="com.freshworks.challenge.views.favourites.FavouritesFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_favourites">
 
