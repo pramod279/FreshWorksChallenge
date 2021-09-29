@@ -3,6 +3,7 @@ package com.freshworks.challenge
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 
 /**
@@ -31,4 +32,13 @@ private fun showProgress(view: ImageView): CircularProgressDrawable {
     }
     progressLoader.start()
     return progressLoader
+}
+
+/*Function for Enabling/Disabling Favourites Button*/
+@BindingAdapter("isFavourite")
+fun isFavourite(view: LottieAnimationView, isFavourite: Boolean) {
+    when {
+        isFavourite -> view.playAnimation()
+        else -> view.cancelAnimation()
+    }
 }

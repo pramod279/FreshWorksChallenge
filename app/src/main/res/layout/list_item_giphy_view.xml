@@ -14,7 +14,7 @@
             type="com.freshworks.challenge.views.trending.adapters.GifImageAdapter.FavouritesClickListener" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_small"
@@ -32,13 +32,14 @@
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/buttonFavourites"
+            android:id="@+id/btnFavourites"
+            isFavourite="@{gifImage.favourite}"
             android:layout_width="@dimen/fav_button_width"
             android:layout_height="@dimen/fav_button_height"
             android:layout_gravity="end"
             android:onClick="@{() -> favourite.onClick(gifImage)}"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
             app:lottie_rawRes="@raw/favourites" />
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

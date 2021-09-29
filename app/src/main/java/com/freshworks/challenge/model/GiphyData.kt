@@ -30,7 +30,8 @@ data class Data(
     @SerializedName("type")
     val type: String,
     @SerializedName("url")
-    val url: String
+    val url: String,
+    val isFavourite: Boolean
 )
 
 data class Images(
