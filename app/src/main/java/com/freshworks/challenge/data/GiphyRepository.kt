@@ -22,7 +22,7 @@ class GiphyRepository(
         const val DEFAULT_PAGE_INDEX = 1
         const val DEFAULT_PAGE_LIMIT = 25
         const val NETWORK_PAGE_SIZE = 50
-        var CURRENT_PAGE_OFFSET = 0
+        var PAGE_OFFSET = 0
 
         //get Gif repository instance
         fun getInstance() = GiphyRepository()

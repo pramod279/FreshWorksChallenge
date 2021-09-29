@@ -8,7 +8,7 @@ import android.app.Application
  *
  * FreshWorks Challenge Application Class
  */
-class FreshWorksApplication : Application() {
+class GiphyApp : Application() {
     override fun onCreate() {
         super.onCreate()
     }

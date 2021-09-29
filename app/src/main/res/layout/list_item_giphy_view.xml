@@ -20,11 +20,20 @@
         <ImageView
             android:id="@+id/ivGif"
             loadImage="@{gifImage.images.Downsized.url}"
-            android:layout_width="@dimen/giphy_item_image_width"
-            android:layout_height="@dimen/giphy_item_image_height"
+            android:layout_width="@dimen/giphy_image_width"
+            android:layout_height="@dimen/giphy_image_height"
             android:contentDescription="@string/desc_giphy"
-            android:maxHeight="@dimen/giphy_item_max_height"
+            android:maxHeight="@dimen/giphy_max_height"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/buttonFavourites"
+            android:layout_width="@dimen/fav_button_width"
+            android:layout_height="@dimen/fav_button_height"
+            android:layout_gravity="end"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/favourites" />
     </androidx.cardview.widget.CardView>
 </layout>

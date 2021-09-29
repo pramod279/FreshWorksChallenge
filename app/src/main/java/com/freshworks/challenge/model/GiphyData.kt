@@ -17,7 +17,7 @@ data class GiphyData(
     @SerializedName("data")
     val data: List<Data>,
     @SerializedName("pagination")
-    val pagination: Pagination
+    val pagination: Pagination?
 )
 
 data class Data(
@@ -60,9 +60,9 @@ data class Pagination(
     @PrimaryKey(autoGenerate = true)
     var idPagination: Long = 0,
     @SerializedName("count")
-    val count: Int,
+    val count: Int?,
     @SerializedName("offset")
-    val offset: Int,
+    val offset: Int?,
     @SerializedName("total_count")
     val totalCount: Int?
 )
