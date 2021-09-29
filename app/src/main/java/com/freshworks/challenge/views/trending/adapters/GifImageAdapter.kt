@@ -6,7 +6,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.freshworks.challenge.BaseViewHolder
 import com.freshworks.challenge.databinding.ListItemGiphyViewBinding
-import com.freshworks.challenge.model.Data
+import com.freshworks.challenge.model.GifInfo
 
 /**
  * @Author: Pramod Selvaraj
@@ -15,14 +15,14 @@ import com.freshworks.challenge.model.Data
  * GIF Image Adapter Class For Loading All Gif Images
  */
 class GifImageAdapter(private val clickListener: FavouritesClickListener) :
-    PagingDataAdapter<Data, BaseViewHolder>(REPO_COMPARATOR) {
+    PagingDataAdapter<GifInfo, BaseViewHolder>(REPO_COMPARATOR) {
     /*Diff Util For Updating The Recycler View If Any Change In Data*/
     companion object {
-        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Data>() {
-            override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean =
+        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<GifInfo>() {
+            override fun areItemsTheSame(oldItem: GifInfo, newItem: GifInfo): Boolean =
                 oldItem == newItem
 
-            override fun areContentsTheSame(oldItem: Data, newItem: Data): Boolean =
+            override fun areContentsTheSame(oldItem: GifInfo, newItem: GifInfo): Boolean =
                 oldItem == newItem
         }
     }
@@ -47,7 +47,7 @@ class GifImageAdapter(private val clickListener: FavouritesClickListener) :
     }
 
     /*Favourites Gif Click Listener*/
-    class FavouritesClickListener(val clickListener: (data: Data) -> Unit) {
-        fun onClick(data: Data) = clickListener(data)
+    class FavouritesClickListener(val clickListener: (gifInfo: GifInfo) -> Unit) {
+        fun onClick(gifInfo: GifInfo) = clickListener(gifInfo)
     }
 }

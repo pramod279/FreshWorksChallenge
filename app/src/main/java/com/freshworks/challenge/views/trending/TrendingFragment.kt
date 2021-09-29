@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.freshworks.challenge.R
-import com.freshworks.challenge.model.Data
+import com.freshworks.challenge.model.GifInfo
 import com.freshworks.challenge.views.loader.LoaderStateAdapter
 import com.freshworks.challenge.views.trending.adapters.GifImageAdapter
 import kotlinx.coroutines.flow.collectLatest
@@ -57,7 +57,7 @@ class TrendingFragment : Fragment(R.layout.fragment_trending) {
     }
 
     /*Mark/UnMark Gif As Favourites*/
-    private fun onFavouriteClicked(data: Data) {
-        Toast.makeText(context, "Favourites !!! ${data.title}", Toast.LENGTH_SHORT).show()
+    private fun onFavouriteClicked(gifInfo: GifInfo) {
+        Toast.makeText(context, "Favourites !!! ${gifInfo.title}", Toast.LENGTH_SHORT).show()
     }
 }

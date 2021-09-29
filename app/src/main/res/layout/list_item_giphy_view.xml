@@ -7,7 +7,7 @@
 
         <variable
             name="gifImage"
-            type="com.freshworks.challenge.model.Data" />
+            type="com.freshworks.challenge.model.GifInfo" />
 
         <variable
             name="favourite"
@@ -23,7 +23,7 @@
 
         <ImageView
             android:id="@+id/ivGif"
-            loadImage="@{gifImage.images.Downsized.url}"
+            loadImage="@{gifImage.images.fixed_height.url}"
             android:layout_width="@dimen/giphy_image_width"
             android:layout_height="@dimen/giphy_image_height"
             android:contentDescription="@string/desc_giphy"

@@ -6,7 +6,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.freshworks.challenge.data.GiphyRepository
-import com.freshworks.challenge.model.Data
+import com.freshworks.challenge.model.GifInfo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -21,9 +21,9 @@ class TrendingViewModel(
 ) : ViewModel() {
     /**
      * We just mapped the data received from the repository to [PagingData<Data>] to show the map
-     * function you can always return the original model if needed, in our case it would be [Data]
+     * function you can always return the original model if needed, in our case it would be [GifInfo]
      */
-    fun fetchGifImages(): Flow<PagingData<Data>> {
+    fun fetchGifImages(): Flow<PagingData<GifInfo>> {
         return repository.letGifImagesFlow()
             .map { it.map { it } }
             .cachedIn(viewModelScope)

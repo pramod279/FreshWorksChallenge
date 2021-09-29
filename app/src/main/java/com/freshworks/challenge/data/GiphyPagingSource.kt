@@ -6,7 +6,7 @@ import com.freshworks.challenge.data.GiphyRepository.Companion.DEFAULT_PAGE_INDE
 import com.freshworks.challenge.data.GiphyRepository.Companion.DEFAULT_PAGE_LIMIT
 import com.freshworks.challenge.data.GiphyRepository.Companion.NETWORK_PAGE_SIZE
 import com.freshworks.challenge.data.GiphyRepository.Companion.PAGE_OFFSET
-import com.freshworks.challenge.model.Data
+import com.freshworks.challenge.model.GifInfo
 import com.freshworks.challenge.repository.GiphyApiService
 import retrofit2.HttpException
 import java.io.IOException
@@ -19,9 +19,9 @@ import java.io.IOException
  */
 class GiphyPagingSource(
     private val service: GiphyApiService,
-) : PagingSource<Int, Data>() {
+) : PagingSource<Int, GifInfo>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Data> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GifInfo> {
         val position = params.key ?: DEFAULT_PAGE_INDEX
         return try {
             val response = service.getTrendingGifs(DEFAULT_PAGE_LIMIT, PAGE_OFFSET)
@@ -48,7 +48,7 @@ class GiphyPagingSource(
     }
 
     // The refresh key is used for subsequent refresh calls to PagingSource.load after the initial load
-    override fun getRefreshKey(state: PagingState<Int, Data>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, GifInfo>): Int? {
         // We need to get the previous key (or next key if previous is null) of the page
         // that was closest to the most recently accessed index.
         // Anchor position is the most recently accessed index

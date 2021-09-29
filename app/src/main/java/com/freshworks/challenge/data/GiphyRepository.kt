@@ -4,7 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
-import com.freshworks.challenge.model.Data
+import com.freshworks.challenge.model.GifInfo
 import com.freshworks.challenge.repository.GiphyApiService
 import com.freshworks.challenge.repository.RemoteInjector
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
  * @Author: Pramod Selvaraj
  * @Date: 29.09.2021
  *
- * Gif Repository For Fetching Data
+ * Gif Repository For Fetching Gif Data
  */
 class GiphyRepository(
     private val service: GiphyApiService = RemoteInjector.injectGiphyApiService(),
@@ -26,17 +26,18 @@ class GiphyRepository(
         const val NETWORK_PAGE_SIZE = 50
         var PAGE_OFFSET = 0
 
-        //get Gif repository instance
+        /*Retrieve Gif repository instance*/
         fun getInstance() = GiphyRepository()
     }
 
     /**
      * Calling the paging source to give results from api calls
-     * and returning the results in the form of flow [Flow<PagingData<GifImageModel>>]
+     * and returning the results in the form of flow [Flow<PagingData<GifInfo>>]
      * since the [PagingDataAdapter] accepts the [PagingData] as the source in later stage
      */
-    fun letGifImagesFlow(pagingConfig: PagingConfig = getDefaultPageConfig())
-            : Flow<PagingData<Data>> {
+    fun letGifImagesFlow(
+        pagingConfig: PagingConfig = getDefaultPageConfig()
+    ): Flow<PagingData<GifInfo>> {
         return Pager(
             config = pagingConfig,
             pagingSourceFactory = { GiphyPagingSource(service) }
