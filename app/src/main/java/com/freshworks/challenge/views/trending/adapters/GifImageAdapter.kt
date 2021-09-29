@@ -14,7 +14,8 @@ import com.freshworks.challenge.model.Data
  *
  * GIF Image Adapter Class For Loading Gif Images
  */
-class GifImageAdapter : PagingDataAdapter<Data, BaseViewHolder>(REPO_COMPARATOR) {
+class GifImageAdapter(private val clickListener: FavouritesClickListener) :
+    PagingDataAdapter<Data, BaseViewHolder>(REPO_COMPARATOR) {
     /*Diff Util For Updating The Recycler View If Any Change In Data*/
     companion object {
         private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Data>() {
@@ -36,10 +37,17 @@ class GifImageAdapter : PagingDataAdapter<Data, BaseViewHolder>(REPO_COMPARATOR)
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         /*Binding The Current Item To The View*/
-        val currentGif = getItem(position)
+        val gifImage = getItem(position)
 
         val itemBinding = holder.binding as ListItemGiphyViewBinding
-        itemBinding.gifImage = currentGif
+
+        itemBinding.gifImage = gifImage
+        itemBinding.favourite = clickListener
         itemBinding.executePendingBindings()
+    }
+
+    /*Favourites Gif Click Listener*/
+    class FavouritesClickListener(val clickListener: (data: Data) -> Unit) {
+        fun onClick(data: Data) = clickListener(data)
     }
 }

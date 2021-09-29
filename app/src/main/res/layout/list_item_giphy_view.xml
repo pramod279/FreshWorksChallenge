@@ -8,6 +8,10 @@
         <variable
             name="gifImage"
             type="com.freshworks.challenge.model.Data" />
+
+        <variable
+            name="favourite"
+            type="com.freshworks.challenge.views.trending.adapters.GifImageAdapter.FavouritesClickListener" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -32,6 +36,7 @@
             android:layout_width="@dimen/fav_button_width"
             android:layout_height="@dimen/fav_button_height"
             android:layout_gravity="end"
+            android:onClick="@{() -> favourite.onClick(gifImage)}"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/favourites" />
