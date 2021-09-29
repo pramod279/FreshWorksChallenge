@@ -9,7 +9,7 @@ import com.freshworks.challenge.databinding.ActivityGiphyBinding
  * @Author: Pramod Selvaraj
  * @Date: 27.09.2021
  *
- * Giphy Activity ==> Initial Landing Screen
+ * Giphy Activity ==> A simple [Activity] subclass as the default destination in the navigation.
  */
 class GiphyActivity : AppCompatActivity() {
 

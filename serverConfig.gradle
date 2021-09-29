@@ -7,4 +7,5 @@ def serverConfig = [:]
  * FreshWorks Challenge Server Configuration
  */
 serverConfig.baseUrl = "\"https://api.giphy.com/v1/gifs/\""
+serverConfig.apiKey = "\"48J1E91Usglqycg7KhzcVpriKVTlDqFZ\""
 ext.serverConfig = serverConfig
