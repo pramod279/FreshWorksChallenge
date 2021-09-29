@@ -13,17 +13,19 @@ import kotlinx.coroutines.flow.Flow
  * @Author: Pramod Selvaraj
  * @Date: 29.09.2021
  */
-class GifImagesRepository(
-    private val giphyApiService: GiphyApiService = RemoteInjector.injectGiphyApiService(),
+class GiphyRepository(
+    private val service: GiphyApiService = RemoteInjector.injectGiphyApiService(),
     // val appDatabase: AppDatabase? = LocalInjector.injectDb()
 ) {
 
     companion object {
         const val DEFAULT_PAGE_INDEX = 1
-        const val DEFAULT_PAGE_SIZE = 20
+        const val DEFAULT_PAGE_LIMIT = 25
+        const val NETWORK_PAGE_SIZE = 50
+        var CURRENT_PAGE_OFFSET = 0
 
         //get Gif repository instance
-        fun getInstance() = GifImagesRepository()
+        fun getInstance() = GiphyRepository()
     }
 
     /**
@@ -35,7 +37,7 @@ class GifImagesRepository(
             : Flow<PagingData<Data>> {
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = { GifImagePagingSource(giphyApiService) }
+            pagingSourceFactory = { GifImagePagingSource(service) }
         ).flow
     }
 
@@ -43,6 +45,6 @@ class GifImagesRepository(
      * Let's define page size, page size is the only required param, rest is optional
      */
     private fun getDefaultPageConfig(): PagingConfig {
-        return PagingConfig(pageSize = DEFAULT_PAGE_SIZE, enablePlaceholders = true)
+        return PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = true)
     }
 }
