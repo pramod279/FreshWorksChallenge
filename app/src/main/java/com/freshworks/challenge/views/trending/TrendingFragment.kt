@@ -18,6 +18,8 @@ import kotlinx.coroutines.launch
 /**
  * @Author: Pramod Selvaraj
  * @Date: 28.09.2021
+ *
+ * Tab 1 ==> Display all the Trending Gif Images
  */
 class TrendingFragment : Fragment(R.layout.fragment_trending) {
     lateinit var trendingViewModel: TrendingViewModel

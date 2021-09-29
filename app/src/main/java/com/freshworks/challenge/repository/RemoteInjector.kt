@@ -1,6 +1,7 @@
 package com.freshworks.challenge.repository
 
 import com.freshworks.challenge.BuildConfig
+import com.freshworks.challenge.repository.ApiUrls.API_KEY
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -10,10 +11,10 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 /**
  * @Author: Pramod Selvaraj
  * @Date: 29.09.2021
+ *
+ * Remote Injector Class For Initialising Retrofit Client For API Calls
  */
 object RemoteInjector {
-    private const val HEADER_API_KEY = "api_key"
-
     /*Fetch Retrofit Client*/
     fun injectGiphyApiService(retrofit: Retrofit = getRetrofit()): GiphyApiService {
         return retrofit.create(GiphyApiService::class.java)
@@ -53,7 +54,7 @@ object RemoteInjector {
         return Interceptor { chain ->
             var req = chain.request()
             req = req.newBuilder().url(
-                req.url.newBuilder().addQueryParameter(HEADER_API_KEY, BuildConfig.API_KEY).build()
+                req.url.newBuilder().addQueryParameter(API_KEY, BuildConfig.API_KEY).build()
             ).build()
             chain.proceed(req)
         }
@@ -63,7 +64,7 @@ object RemoteInjector {
     private fun getOkHttpNetworkInterceptor(): Interceptor {
         return Interceptor { chain ->
             val newRequest =
-                chain.request().newBuilder().addHeader(HEADER_API_KEY, BuildConfig.API_KEY).build()
+                chain.request().newBuilder().addHeader(API_KEY, BuildConfig.API_KEY).build()
             chain.proceed(newRequest)
         }
     }

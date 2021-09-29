@@ -9,6 +9,8 @@ import com.bumptech.glide.Glide
 /**
  * @Author: Pramod Selvaraj
  * @Date: 29.09.2021
+ *
+ * UI Binder Class For Mapping Results To UI via Data Binding
  */
 @BindingAdapter("loadImage")
 fun loadImage(view: ImageView, imageUrl: String?) {

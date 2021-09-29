@@ -7,6 +7,7 @@ package com.freshworks.challenge.repository
  * Class For Managing API Constants & URL Endpoints
  */
 object ApiUrls {
+    const val API_KEY = "api_key"
     const val TRENDING = "trending"
     const val SEARCH = "search"
     const val LIMIT = "limit"

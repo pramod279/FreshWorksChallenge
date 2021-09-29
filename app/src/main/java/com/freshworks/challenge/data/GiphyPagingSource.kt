@@ -14,8 +14,10 @@ import java.io.IOException
 /**
  * @Author: Pramod Selvaraj
  * @Date: 29.09.2021
+ *
+ * Gif Paging Source Class For Retrieving Paginated Data
  */
-class GifImagePagingSource(
+class GiphyPagingSource(
     private val service: GiphyApiService,
 ) : PagingSource<Int, Data>() {
 

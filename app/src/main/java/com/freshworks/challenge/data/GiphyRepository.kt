@@ -12,6 +12,8 @@ import kotlinx.coroutines.flow.Flow
 /**
  * @Author: Pramod Selvaraj
  * @Date: 29.09.2021
+ *
+ * Gif Repository For Fetching Data
  */
 class GiphyRepository(
     private val service: GiphyApiService = RemoteInjector.injectGiphyApiService(),
@@ -37,7 +39,7 @@ class GiphyRepository(
             : Flow<PagingData<Data>> {
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = { GifImagePagingSource(service) }
+            pagingSourceFactory = { GiphyPagingSource(service) }
         ).flow
     }
 

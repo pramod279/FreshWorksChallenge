@@ -12,7 +12,7 @@ import com.freshworks.challenge.model.Data
  * @Author: Pramod Selvaraj
  * @Date: 28.09.2021
  *
- * GIF Image Adapter Class For Loading Gif Images
+ * GIF Image Adapter Class For Loading All Gif Images
  */
 class GifImageAdapter(private val clickListener: FavouritesClickListener) :
     PagingDataAdapter<Data, BaseViewHolder>(REPO_COMPARATOR) {

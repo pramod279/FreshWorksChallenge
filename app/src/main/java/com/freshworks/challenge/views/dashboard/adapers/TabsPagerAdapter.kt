@@ -13,6 +13,8 @@ const val FAVOURITES_PAGE_INDEX = 1
  * @Date: 27.09.2021
  *
  * Tabs Pager Adapter For Creating Tabs
+ * Tab 1 ==> Trending Gifs
+ * Tab 2 ==> Favourites Gifs
  */
 class TabsPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     /**

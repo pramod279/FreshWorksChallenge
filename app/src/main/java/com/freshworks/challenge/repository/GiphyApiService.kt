@@ -9,6 +9,8 @@ import retrofit2.http.Query
 /**
  * @Author: Pramod Selvaraj
  * @Date: 29.09.2021
+ *
+ * Giphy API Service Class For Managing API Calls
  */
 interface GiphyApiService {
     @GET(ApiUrls.TRENDING)

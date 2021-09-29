@@ -13,13 +13,14 @@ import kotlinx.coroutines.flow.map
 /**
  * @Author: Pramod Selvaraj
  * @Date: 28.09.2021
+ *
+ * Trending Gifs View Model Class for Trending Fragment
  */
 class TrendingViewModel(
     private val repository: GiphyRepository = GiphyRepository.getInstance()
 ) : ViewModel() {
-
     /**
-     * We just mapped the data received from the repository to [PagingData<String>] to show the map
+     * We just mapped the data received from the repository to [PagingData<Data>] to show the map
      * function you can always return the original model if needed, in our case it would be [Data]
      */
     fun fetchGifImages(): Flow<PagingData<Data>> {
