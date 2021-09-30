@@ -14,13 +14,10 @@ import com.bumptech.glide.Glide
  */
 @BindingAdapter("loadImage")
 fun loadImage(view: ImageView, imageUrl: String?) {
-    /*Show Progress Bar*/
-    val progressLoader = showProgress(view)
-
     /*Load Image URLs*/
     Glide.with(view.context)
         .load(imageUrl)
-        .placeholder(progressLoader)
+        .placeholder(showProgress(view))
         .error(R.drawable.ic_placeholder)
         .fallback(R.drawable.ic_placeholder)
         .into(view)
@@ -36,11 +33,11 @@ private fun showProgress(view: ImageView): CircularProgressDrawable {
     return progressLoader
 }
 
-/*Function for Enabling/Disabling Favourites Button*/
-@BindingAdapter("isFavourite")
-fun isFavourite(view: LottieAnimationView, isFavourite: Boolean) {
+/*Function for Toggling Favourites Animation*/
+@BindingAdapter("toggleFavourites")
+fun toggleFavourites(view: LottieAnimationView, isFavourite: Boolean) {
     when {
-        isFavourite -> view.playAnimation()
+        !isFavourite -> view.playAnimation()
         else -> view.cancelAnimation()
     }
 }

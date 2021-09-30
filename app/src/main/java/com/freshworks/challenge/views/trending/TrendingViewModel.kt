@@ -39,7 +39,7 @@ class TrendingViewModel @Inject constructor(
     }
 
     /*Adding/Removing Gif Image To Favourites*/
-    fun favouritesMarker(gifInfo: GifInfo) {
+    fun toggleFavourites(gifInfo: GifInfo) {
         viewModelScope.launch {
             when {
                 isFavourite(gifInfo) -> removeFromFavourites(gifInfo.id)
