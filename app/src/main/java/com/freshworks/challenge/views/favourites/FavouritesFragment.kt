@@ -64,7 +64,8 @@ class FavouritesFragment : Fragment() {
 
     /*Mark/UnMark Gif As Favourites*/
     private fun onFavouriteClicked(gifInfo: GifInfo) {
-        trendingGifViewModel.addToFavourites(gifInfo)
-        // trendingGifViewModel.removeFromFavourites(gifInfo.id)
+        lifecycleScope.launch {
+            trendingGifViewModel.favouritesMarker(gifInfo)
+        }
     }
 }

@@ -38,17 +38,36 @@ class TrendingViewModel @Inject constructor(
             .cachedIn(viewModelScope)
     }
 
+    /*Adding/Removing Gif Image To Favourites*/
+    fun favouritesMarker(gifInfo: GifInfo) {
+        viewModelScope.launch {
+            when {
+                isFavourite(gifInfo) -> {
+                    removeFromFavourites(gifInfo.id)
+                }
+                else -> {
+                    addToFavourites(gifInfo)
+                }
+            }
+        }
+    }
+
     /*Adding Gif Image To Favourites*/
-    fun addToFavourites(gifInfo: GifInfo) {
+    private fun addToFavourites(gifInfo: GifInfo) {
         viewModelScope.launch {
             repository.markFavourite(gifInfo)
         }
     }
 
     /*Removing Gif Image From Favourites*/
-    fun removeFromFavourites(gifId: String) {
+    private fun removeFromFavourites(gifId: String) {
         viewModelScope.launch {
             repository.unMarkFavourite(gifId)
         }
+    }
+
+    /*Check If The Gif Image Is Favourite Or Not*/
+    private suspend fun isFavourite(gifInfo: GifInfo): Boolean {
+        return repository.isFavourite(gifInfo)
     }
 }

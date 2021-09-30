@@ -53,6 +53,13 @@ class GiphyRepository @Inject constructor(
     /**
      * Marking Gif Images To Favourites
      */
+    suspend fun isFavourite(gifInfo: GifInfo): Boolean {
+        return favouritesDao.isFavourite(gifInfo.id)
+    }
+
+    /**
+     * Marking Gif Images To Favourites
+     */
     suspend fun markFavourite(gifInfo: GifInfo) {
         favouritesDao.insertFavourite(gifInfo)
     }

@@ -19,6 +19,9 @@ interface FavouritesDao {
     @Query("SELECT * FROM favourites_table")
     fun getMyFavourites(): PagingSource<Int, GifInfo>
 
+    @Query("SELECT EXISTS (SELECT * FROM favourites_table WHERE id = :gifId)")
+    suspend fun isFavourite(gifId: String): Boolean
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavourite(gifInfo: GifInfo)
 
