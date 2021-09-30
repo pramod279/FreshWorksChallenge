@@ -5,42 +5,66 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.freshworks.challenge.R
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import com.freshworks.challenge.databinding.FragmentFavouritesBinding
+import com.freshworks.challenge.model.GifInfo
+import com.freshworks.challenge.views.loader.LoaderStateAdapter
+import com.freshworks.challenge.views.trending.TrendingViewModel
+import com.freshworks.challenge.views.trending.adapters.GifImageAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 
 /**
- * A simple [Fragment] subclass as the second destination in the navigation.
+ * @Author: Pramod Selvaraj
+ * @Date: 28.09.2021
+ *
+ * Tab 2 ==> Display all My Favourite Gif Images
  */
 @AndroidEntryPoint
 class FavouritesFragment : Fragment() {
-    private var _binding: FragmentFavouritesBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentFavouritesBinding
+    private val trendingGifViewModel: TrendingViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        _binding = FragmentFavouritesBinding.inflate(inflater, container, false)
+        binding = FragmentFavouritesBinding.inflate(inflater, container, false)
+        subscribeUi(binding)
         return binding.root
-
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun subscribeUi(binding: FragmentFavouritesBinding) {
+        binding.rvGiphy.layoutManager = GridLayoutManager(context, 2)
+        /*Gif Images Adapter For Displaying Gif Images*/
+        val adapter = GifImageAdapter(GifImageAdapter.FavouritesClickListener {
+            onFavouriteClicked(it)
+        })
+        /*Loader Adapter For Progress & Retry Event*/
+        val loaderStateAdapter = LoaderStateAdapter { adapter.retry() }
+        binding.rvGiphy.adapter = adapter.withLoadStateFooter(loaderStateAdapter)
 
-        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+        /*Fetch My Favourite Gifs Images*/
+        fetchMyFavouriteGifs(adapter)
+    }
+
+    /*Function for Fetching My Favourite Gif Images*/
+    private fun fetchMyFavouriteGifs(adapter: GifImageAdapter) {
+        lifecycleScope.launch {
+            trendingGifViewModel.fetchMyFavourites().distinctUntilChanged().collectLatest {
+                adapter.submitData(it)
+            }
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    /*Mark/UnMark Gif As Favourites*/
+    private fun onFavouriteClicked(gifInfo: GifInfo) {
+        trendingGifViewModel.addToFavourites(gifInfo)
+        // trendingGifViewModel.removeFromFavourites(gifInfo.id)
     }
 }
