@@ -15,7 +15,7 @@ import com.freshworks.challenge.utilities.DATABASE_NAME
  * The Room database for FreshWorks Challenge App
  */
 @Database(entities = [Favourites::class], version = 1, exportSchema = false)
-public abstract class AppDatabase : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
 
     abstract fun favouritesDao(): FavouritesDao
 

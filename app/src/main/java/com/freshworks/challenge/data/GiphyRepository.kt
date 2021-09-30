@@ -4,9 +4,11 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
+import com.freshworks.challenge.data.db.AppDatabase
 import com.freshworks.challenge.model.GifInfo
 import com.freshworks.challenge.repository.GiphyApiService
 import com.freshworks.challenge.repository.RemoteInjector
+import com.freshworks.challenge.repository.local.DatabaseInjector
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -17,7 +19,7 @@ import kotlinx.coroutines.flow.Flow
  */
 class GiphyRepository(
     private val service: GiphyApiService = RemoteInjector.injectGiphyApiService(),
-    // val appDatabase: AppDatabase? = LocalInjector.injectDb()
+    val appDatabase: AppDatabase? = DatabaseInjector.injectDb()
 ) {
 
     companion object {
