@@ -42,12 +42,8 @@ class TrendingViewModel @Inject constructor(
     fun favouritesMarker(gifInfo: GifInfo) {
         viewModelScope.launch {
             when {
-                isFavourite(gifInfo) -> {
-                    removeFromFavourites(gifInfo.id)
-                }
-                else -> {
-                    addToFavourites(gifInfo)
-                }
+                isFavourite(gifInfo) -> removeFromFavourites(gifInfo.id)
+                else -> addToFavourites(gifInfo)
             }
         }
     }
