@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -50,10 +49,7 @@ class TrendingFragment : Fragment() {
         binding.rvGiphy.adapter = adapter.withLoadStateFooter(loaderStateAdapter)
 
         /*Fetch Trending Gif Images*/
-        //fetchTrendingGifs(adapter)
-
-        /*Fetch Favourite Gif Images*/
-        fetchMyFavourites(adapter)
+        fetchTrendingGifs(adapter)
     }
 
     /*Function for Fetching Trending Gif Images*/
@@ -65,15 +61,9 @@ class TrendingFragment : Fragment() {
         }
     }
 
-    /*Function for Fetching My Favourite Gif Images*/
-    private fun fetchMyFavourites(adapter: GifImageAdapter) {
-
-    }
-
     /*Mark/UnMark Gif As Favourites*/
     private fun onFavouriteClicked(gifInfo: GifInfo) {
-        Toast.makeText(context, "Favourites !!! ${gifInfo.id}", Toast.LENGTH_SHORT).show()
-        // trendingGifViewModel.addToFavourites(gifInfo)
+        trendingGifViewModel.addToFavourites(gifInfo)
         // trendingGifViewModel.removeFromFavourites(gifInfo.id)
     }
 }

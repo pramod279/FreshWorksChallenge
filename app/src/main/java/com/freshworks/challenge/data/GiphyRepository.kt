@@ -3,7 +3,6 @@ package com.freshworks.challenge.data
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.freshworks.challenge.data.db.AppDatabase
 import com.freshworks.challenge.model.Favourites
 import com.freshworks.challenge.model.GifInfo
 import com.freshworks.challenge.model.dao.FavouritesDao
@@ -22,20 +21,26 @@ import javax.inject.Singleton
  */
 @Singleton
 class GiphyRepository @Inject constructor(
-    private val mService: GiphyApiService,
-    private val mDatabase: AppDatabase,
+    private val service: GiphyApiService,
     private val favouritesDao: FavouritesDao
 ) {
-    /**
-     * Calling the paging source to give results from api calls
-     * and returning the results in the form of flow [Flow<PagingData<GifInfo>>]
-     */
+    /*Fetch Trending Gif Images Using Pagination*/
     fun letTrendingGifsFlow(
         pagingConfig: PagingConfig = getDefaultPageConfig()
     ): Flow<PagingData<GifInfo>> {
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = { GiphyPagingSource(mService) }
+            pagingSourceFactory = { GiphyPagingSource(service) }
+        ).flow
+    }
+
+    /*Fetch My Favourite Gif Images Using Pagination*/
+    fun letMyFavouritesFlow(
+        pagingConfig: PagingConfig = getDefaultPageConfig()
+    ): Flow<PagingData<Favourites>> {
+        return Pager(
+            config = pagingConfig,
+            pagingSourceFactory = { favouritesDao.getMyFavourites() }
         ).flow
     }
 
