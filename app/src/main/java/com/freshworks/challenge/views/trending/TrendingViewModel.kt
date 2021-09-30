@@ -6,7 +6,6 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.freshworks.challenge.data.GiphyRepository
-import com.freshworks.challenge.model.Favourites
 import com.freshworks.challenge.model.GifInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -33,7 +32,7 @@ class TrendingViewModel @Inject constructor(
     }
 
     /*Fetch My Favourite Gif Images Using Pagination*/
-    fun fetchMyFavourites(): Flow<PagingData<Favourites>> {
+    fun fetchMyFavourites(): Flow<PagingData<GifInfo>> {
         return repository.letMyFavouritesFlow()
             .map { it.map { it } }
             .cachedIn(viewModelScope)

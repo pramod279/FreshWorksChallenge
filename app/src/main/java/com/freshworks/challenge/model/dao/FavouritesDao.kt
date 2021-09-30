@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.freshworks.challenge.model.Favourites
+import com.freshworks.challenge.model.GifInfo
 
 /**
  * @Author: Pramod Selvaraj
@@ -17,10 +17,10 @@ import com.freshworks.challenge.model.Favourites
 @Dao
 interface FavouritesDao {
     @Query("SELECT * FROM favourites_table")
-    fun getMyFavourites(): PagingSource<Int, Favourites>
+    fun getMyFavourites(): PagingSource<Int, GifInfo>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFavourite(favourites: Favourites)
+    suspend fun insertFavourite(gifInfo: GifInfo)
 
     @Query("DELETE FROM favourites_table WHERE id = :gifId")
     suspend fun removeFavourite(gifId: String)

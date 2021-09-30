@@ -33,7 +33,6 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/btnFavourites"
-            isFavourite="@{gifImage.favourite}"
             android:layout_width="@dimen/fav_button_width"
             android:layout_height="@dimen/fav_button_height"
             android:layout_gravity="end"

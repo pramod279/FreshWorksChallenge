@@ -3,7 +3,6 @@ package com.freshworks.challenge.data
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.freshworks.challenge.model.Favourites
 import com.freshworks.challenge.model.GifInfo
 import com.freshworks.challenge.model.dao.FavouritesDao
 import com.freshworks.challenge.repository.GiphyApiService
@@ -37,7 +36,7 @@ class GiphyRepository @Inject constructor(
     /*Fetch My Favourite Gif Images Using Pagination*/
     fun letMyFavouritesFlow(
         pagingConfig: PagingConfig = getDefaultPageConfig()
-    ): Flow<PagingData<Favourites>> {
+    ): Flow<PagingData<GifInfo>> {
         return Pager(
             config = pagingConfig,
             pagingSourceFactory = { favouritesDao.getMyFavourites() }
@@ -55,13 +54,7 @@ class GiphyRepository @Inject constructor(
      * Marking Gif Images To Favourites
      */
     suspend fun markFavourite(gifInfo: GifInfo) {
-        val favouriteGif = Favourites(
-            gifInfo.id,
-            gifInfo.title,
-            gifInfo.images.fixed_height.url,
-            false
-        )
-        favouritesDao.insertFavourite(favouriteGif)
+        favouritesDao.insertFavourite(gifInfo)
     }
 
     /**
