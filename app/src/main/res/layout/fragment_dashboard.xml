@@ -53,6 +53,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:tabIconTint="@drawable/tab_icon_selector_color"
+                app:tabInlineLabel="true"
+                app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
                 app:tabTextColor="?attr/colorPrimaryDark" />
         </com.google.android.material.appbar.AppBarLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
