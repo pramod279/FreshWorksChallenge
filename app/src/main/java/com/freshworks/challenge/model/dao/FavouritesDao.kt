@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
-import com.freshworks.challenge.model.GiphyData
+import com.freshworks.challenge.model.Favourites
 
 /**
  * @Author: Pramod Selvaraj
@@ -16,8 +16,8 @@ import com.freshworks.challenge.model.GiphyData
 @Dao
 interface FavouritesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFavourite(giphyData: GiphyData)
+    suspend fun insertFavourite(favourites: Favourites)
 
     @Delete
-    fun deleteFavourite(giphyData: GiphyData)
+    fun deleteFavourite(favourites: Favourites)
 }

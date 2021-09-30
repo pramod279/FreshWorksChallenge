@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.freshworks.challenge.model.GiphyData
+import com.freshworks.challenge.model.Favourites
 import com.freshworks.challenge.model.dao.FavouritesDao
 import com.freshworks.challenge.utilities.DATABASE_NAME
 
@@ -12,9 +12,9 @@ import com.freshworks.challenge.utilities.DATABASE_NAME
  * @Author: Pramod Selvaraj
  * @Date: 30.09.2021
  *
- * The Room database for this app
+ * The Room database for FreshWorks Challenge App
  */
-@Database(entities = [GiphyData::class], version = 1, exportSchema = false)
+@Database(entities = [Favourites::class], version = 1, exportSchema = false)
 public abstract class AppDatabase : RoomDatabase() {
 
     abstract fun favouritesDao(): FavouritesDao
