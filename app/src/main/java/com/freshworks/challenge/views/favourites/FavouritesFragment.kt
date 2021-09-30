@@ -8,12 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.freshworks.challenge.R
 import com.freshworks.challenge.databinding.FragmentFavouritesBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
+@AndroidEntryPoint
 class FavouritesFragment : Fragment() {
-
     private var _binding: FragmentFavouritesBinding? = null
 
     // This property is only valid between onCreateView and
@@ -23,7 +24,7 @@ class FavouritesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentFavouritesBinding.inflate(inflater, container, false)
         return binding.root

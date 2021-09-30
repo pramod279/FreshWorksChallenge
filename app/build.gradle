@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 def keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -96,6 +97,9 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     /*Kotlin Coroutines Support Library*/
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1'
+    /*Dagger Hilt Dependency Injection Support Library*/
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
     /*Paging Support Library*/
     implementation 'androidx.paging:paging-runtime-ktx:3.0.1'
     /*Gson Support Library*/

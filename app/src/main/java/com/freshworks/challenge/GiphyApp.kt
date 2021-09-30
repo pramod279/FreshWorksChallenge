@@ -3,6 +3,7 @@ package com.freshworks.challenge
 import android.app.Application
 import com.freshworks.challenge.data.db.AppDatabase
 import com.freshworks.challenge.repository.local.DatabaseInjector
+import dagger.hilt.android.HiltAndroidApp
 
 /**
  * @Author: Pramod Selvaraj
@@ -10,6 +11,7 @@ import com.freshworks.challenge.repository.local.DatabaseInjector
  *
  * FreshWorks Challenge Application Class
  */
+@HiltAndroidApp
 class GiphyApp : Application() {
     override fun onCreate() {
         super.onCreate()

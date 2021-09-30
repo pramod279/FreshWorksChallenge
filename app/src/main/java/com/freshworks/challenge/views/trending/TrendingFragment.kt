@@ -1,16 +1,19 @@
 package com.freshworks.challenge.views.trending
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.freshworks.challenge.R
+import com.freshworks.challenge.databinding.FragmentTrendingBinding
 import com.freshworks.challenge.model.GifInfo
 import com.freshworks.challenge.views.loader.LoaderStateAdapter
 import com.freshworks.challenge.views.trending.adapters.GifImageAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
@@ -21,36 +24,39 @@ import kotlinx.coroutines.launch
  *
  * Tab 1 ==> Display all the Trending Gif Images
  */
-class TrendingFragment : Fragment(R.layout.fragment_trending) {
-    lateinit var trendingViewModel: TrendingViewModel
-    lateinit var rvGIFImages: RecyclerView
-    private lateinit var adapter: GifImageAdapter
-    lateinit var loaderStateAdapter: LoaderStateAdapter
+@AndroidEntryPoint
+class TrendingFragment : Fragment() {
+    private lateinit var binding: FragmentTrendingBinding
+    private val viewModel: TrendingViewModel by viewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initMembers()
-        setUpViews(view)
-        fetchGifImages()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentTrendingBinding.inflate(inflater, container, false)
+        subscribeUi(binding)
+        return binding.root
     }
 
-    private fun initMembers() {
-        trendingViewModel = defaultViewModelProviderFactory.create(TrendingViewModel::class.java)
-        adapter = GifImageAdapter(GifImageAdapter.FavouritesClickListener {
+    private fun subscribeUi(binding: FragmentTrendingBinding) {
+        binding.rvGiphy.layoutManager = GridLayoutManager(context, 2)
+        /*Gif Images Adapter For Displaying Gif Images*/
+        val adapter = GifImageAdapter(GifImageAdapter.FavouritesClickListener {
             onFavouriteClicked(it)
         })
-        loaderStateAdapter = LoaderStateAdapter { adapter.retry() }
+        /*Loader Adapter For Progress & Retry Event*/
+        val loaderStateAdapter = LoaderStateAdapter { adapter.retry() }
+        binding.rvGiphy.adapter = adapter.withLoadStateFooter(loaderStateAdapter)
+
+        /*Fetch Gif Images*/
+        fetchGifImages(adapter)
     }
 
-    private fun setUpViews(view: View) {
-        rvGIFImages = view.findViewById(R.id.rvGiphy)
-        rvGIFImages.layoutManager = GridLayoutManager(context, 2)
-        rvGIFImages.adapter = adapter.withLoadStateFooter(loaderStateAdapter)
-    }
-
-    private fun fetchGifImages() {
+    /*Function for Fetching All Gif Images*/
+    private fun fetchGifImages(adapter: GifImageAdapter) {
         lifecycleScope.launch {
-            trendingViewModel.fetchGifImages().distinctUntilChanged().collectLatest {
+            viewModel.fetchGifImages().distinctUntilChanged().collectLatest {
                 adapter.submitData(it)
             }
         }
@@ -59,5 +65,6 @@ class TrendingFragment : Fragment(R.layout.fragment_trending) {
     /*Mark/UnMark Gif As Favourites*/
     private fun onFavouriteClicked(gifInfo: GifInfo) {
         Toast.makeText(context, "Favourites !!! ${gifInfo.title}", Toast.LENGTH_SHORT).show()
+        //viewModel.addGifToFavourites(gifInfo)
     }
 }

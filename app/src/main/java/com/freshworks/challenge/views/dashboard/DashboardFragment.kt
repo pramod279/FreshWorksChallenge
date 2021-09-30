@@ -12,6 +12,7 @@ import com.freshworks.challenge.views.dashboard.adapers.FAVOURITES_PAGE_INDEX
 import com.freshworks.challenge.views.dashboard.adapers.TRENDING_PAGE_INDEX
 import com.freshworks.challenge.views.dashboard.adapers.TabsPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * @Author: Pramod Selvaraj
@@ -19,6 +20,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  *
  * Dashboard Fragment ==> Initialise View Pager & Tabs Layout
  */
+@AndroidEntryPoint
 class DashboardFragment : Fragment() {
 
     override fun onCreateView(

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil.setContentView
 import com.freshworks.challenge.databinding.ActivityGiphyBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * @Author: Pramod Selvaraj
@@ -11,6 +12,7 @@ import com.freshworks.challenge.databinding.ActivityGiphyBinding
  *
  * Giphy Activity ==> A simple [GiphyActivity] subclass as the default destination in the navigation.
  */
+@AndroidEntryPoint
 class GiphyActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
