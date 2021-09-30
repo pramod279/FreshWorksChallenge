@@ -3,23 +3,26 @@ package com.freshworks.challenge.data
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.PagingDataAdapter
-import com.freshworks.challenge.data.db.AppDatabase
+import com.freshworks.challenge.model.Favourites
 import com.freshworks.challenge.model.GifInfo
+import com.freshworks.challenge.model.dao.FavouritesDao
 import com.freshworks.challenge.repository.GiphyApiService
-import com.freshworks.challenge.repository.RemoteInjector
-import com.freshworks.challenge.repository.local.DatabaseInjector
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * @Author: Pramod Selvaraj
- * @Date: 29.09.2021
+ * @Date: 28.09.2021
  *
- * Gif Repository For Fetching Gif Data
+ * Repository module for handling data operations.
+ *
+ * Collecting from the Flows in [GifInfo] is main-safe.
  */
-class GiphyRepository(
-    private val service: GiphyApiService = RemoteInjector.injectGiphyApiService(),
-    val appDatabase: AppDatabase? = DatabaseInjector.injectDb()
+@Singleton
+class GiphyRepository @Inject constructor(
+    private val service: GiphyApiService,
+    private val favouritesDao: FavouritesDao
 ) {
 
     companion object {
@@ -27,15 +30,11 @@ class GiphyRepository(
         const val DEFAULT_PAGE_LIMIT = 25
         const val NETWORK_PAGE_SIZE = 50
         var PAGE_OFFSET = 0
-
-        /*Retrieve Gif repository instance*/
-        fun getInstance() = GiphyRepository()
     }
 
     /**
      * Calling the paging source to give results from api calls
      * and returning the results in the form of flow [Flow<PagingData<GifInfo>>]
-     * since the [PagingDataAdapter] accepts the [PagingData] as the source in later stage
      */
     fun letGifImagesFlow(
         pagingConfig: PagingConfig = getDefaultPageConfig()
@@ -51,5 +50,28 @@ class GiphyRepository(
      */
     private fun getDefaultPageConfig(): PagingConfig {
         return PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = true)
+    }
+
+    /*Function for Getting My Favourites Gifs*/
+    fun getMyFavourites() = favouritesDao.getMyFavourites()
+
+    /**
+     * Marking Gif Images To Favourites
+     */
+    suspend fun createFavourites(gifInfo: GifInfo) {
+        val favouriteGif = Favourites(
+            gifInfo.id,
+            gifInfo.title,
+            gifInfo.images.fixed_height.url,
+            false
+        )
+        favouritesDao.insertFavourite(favouriteGif)
+    }
+
+    /**
+     * Removing Gif Images To Favourites
+     */
+    suspend fun removeFavourites(gifId: String) {
+        favouritesDao.removeFavourite(gifId)
     }
 }

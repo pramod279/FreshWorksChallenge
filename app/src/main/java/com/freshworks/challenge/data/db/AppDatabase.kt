@@ -17,7 +17,7 @@ import com.freshworks.challenge.utilities.DATABASE_NAME
 @Database(entities = [Favourites::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun favouritesDao(): FavouritesDao
+    abstract fun getFavouritesDao(): FavouritesDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the same time.

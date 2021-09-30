@@ -1,10 +1,11 @@
 package com.freshworks.challenge.model.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.freshworks.challenge.model.Favourites
+import kotlinx.coroutines.flow.Flow
 
 /**
  * @Author: Pramod Selvaraj
@@ -15,9 +16,12 @@ import com.freshworks.challenge.model.Favourites
  */
 @Dao
 interface FavouritesDao {
+    @Query("SELECT * FROM favourites_table")
+    fun getMyFavourites(): Flow<List<Favourites>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavourite(favourites: Favourites)
 
-    @Delete
-    fun deleteFavourite(favourites: Favourites)
+    @Query("DELETE FROM favourites_table WHERE id = :gifId")
+    suspend fun removeFavourite(gifId: String)
 }

@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class TrendingFragment : Fragment() {
     private lateinit var binding: FragmentTrendingBinding
-    private val viewModel: TrendingViewModel by viewModels()
+    private val trendingGifViewModel: TrendingViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,7 +56,7 @@ class TrendingFragment : Fragment() {
     /*Function for Fetching All Gif Images*/
     private fun fetchGifImages(adapter: GifImageAdapter) {
         lifecycleScope.launch {
-            viewModel.fetchGifImages().distinctUntilChanged().collectLatest {
+            trendingGifViewModel.fetchGifImages().distinctUntilChanged().collectLatest {
                 adapter.submitData(it)
             }
         }
@@ -64,7 +64,8 @@ class TrendingFragment : Fragment() {
 
     /*Mark/UnMark Gif As Favourites*/
     private fun onFavouriteClicked(gifInfo: GifInfo) {
-        Toast.makeText(context, "Favourites !!! ${gifInfo.title}", Toast.LENGTH_SHORT).show()
-        //viewModel.addGifToFavourites(gifInfo)
+        Toast.makeText(context, "Favourites !!! ${gifInfo.id}", Toast.LENGTH_SHORT).show()
+        // trendingGifViewModel.addToFavourites(gifInfo)
+        // trendingGifViewModel.removeFromFavourites(gifInfo.id)
     }
 }

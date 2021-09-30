@@ -1,8 +1,6 @@
 package com.freshworks.challenge
 
 import android.app.Application
-import com.freshworks.challenge.data.db.AppDatabase
-import com.freshworks.challenge.repository.local.DatabaseInjector
 import dagger.hilt.android.HiltAndroidApp
 
 /**
@@ -15,11 +13,5 @@ import dagger.hilt.android.HiltAndroidApp
 class GiphyApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        initRoomDB()
-    }
-
-    /*Initialise Room Database*/
-    private fun initRoomDB() {
-        DatabaseInjector.appDatabase = AppDatabase.getDatabase(this@GiphyApp)
     }
 }
