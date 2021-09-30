@@ -8,35 +8,17 @@
         android:id="@+id/dashboard_fragment"
         android:name="com.freshworks.challenge.views.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard">
-
-        <action
-            android:id="@+id/action_view_pager_fragment_to_plant_detail_fragment"
-            app:destination="@id/SecondFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
+        tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/trending_fragment"
         android:name="com.freshworks.challenge.views.trending.TrendingFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_trending">
+        android:label="@string/trending_fragment_label"
+        tools:layout="@layout/fragment_trending" />
 
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/favourites_fragment"
         android:name="com.freshworks.challenge.views.favourites.FavouritesFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_favourites">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+        android:label="@string/favourites_fragment_label"
+        tools:layout="@layout/fragment_favourites" />
 </navigation>

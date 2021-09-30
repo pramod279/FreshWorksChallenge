@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">FreshWorks Challenge</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="previous">Previous</string>
+    <string name="trending_fragment_label">Trending Fragment</string>
+    <string name="favourites_fragment_label">Favourites Fragment</string>
 
     <string name="title_dashboard">Dashboard</string>
     <string name="tab_trending">Trending</string>
