@@ -1,11 +1,11 @@
 package com.freshworks.challenge.model.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.freshworks.challenge.model.Favourites
-import kotlinx.coroutines.flow.Flow
 
 /**
  * @Author: Pramod Selvaraj
@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface FavouritesDao {
     @Query("SELECT * FROM favourites_table")
-    fun getMyFavourites(): Flow<List<Favourites>>
+    fun getMyFavourites(): PagingSource<Int, Favourites>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavourite(favourites: Favourites)

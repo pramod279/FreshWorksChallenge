@@ -49,17 +49,25 @@ class TrendingFragment : Fragment() {
         val loaderStateAdapter = LoaderStateAdapter { adapter.retry() }
         binding.rvGiphy.adapter = adapter.withLoadStateFooter(loaderStateAdapter)
 
-        /*Fetch Gif Images*/
-        fetchGifImages(adapter)
+        /*Fetch Trending Gif Images*/
+        //fetchTrendingGifs(adapter)
+
+        /*Fetch Favourite Gif Images*/
+        fetchMyFavourites(adapter)
     }
 
-    /*Function for Fetching All Gif Images*/
-    private fun fetchGifImages(adapter: GifImageAdapter) {
+    /*Function for Fetching Trending Gif Images*/
+    private fun fetchTrendingGifs(adapter: GifImageAdapter) {
         lifecycleScope.launch {
-            trendingGifViewModel.fetchGifImages().distinctUntilChanged().collectLatest {
+            trendingGifViewModel.fetchTrendingGifs().distinctUntilChanged().collectLatest {
                 adapter.submitData(it)
             }
         }
+    }
+
+    /*Function for Fetching My Favourite Gif Images*/
+    private fun fetchMyFavourites(adapter: GifImageAdapter) {
+
     }
 
     /*Mark/UnMark Gif As Favourites*/

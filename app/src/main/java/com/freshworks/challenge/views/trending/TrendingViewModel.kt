@@ -23,12 +23,10 @@ import javax.inject.Inject
 class TrendingViewModel @Inject constructor(
     private val repository: GiphyRepository
 ) : ViewModel() {
-    /**
-     * We just mapped the data received from the repository to [PagingData<GifInfo>] to show the map
-     * function you can always return the original model if needed, in our case it would be [GifInfo]
-     */
-    fun fetchGifImages(): Flow<PagingData<GifInfo>> {
-        return repository.letGifImagesFlow()
+
+    /*Fetch Trending Gif Images Using Pagination*/
+    fun fetchTrendingGifs(): Flow<PagingData<GifInfo>> {
+        return repository.letTrendingGifsFlow()
             .map { it.map { it } }
             .cachedIn(viewModelScope)
     }
@@ -36,14 +34,14 @@ class TrendingViewModel @Inject constructor(
     /*Adding Gif Image To Favourites*/
     fun addToFavourites(gifInfo: GifInfo) {
         viewModelScope.launch {
-            repository.createFavourites(gifInfo)
+            repository.markFavourite(gifInfo)
         }
     }
 
     /*Removing Gif Image From Favourites*/
     fun removeFromFavourites(gifId: String) {
         viewModelScope.launch {
-            repository.removeFavourites(gifId)
+            repository.unMarkFavourite(gifId)
         }
     }
 }

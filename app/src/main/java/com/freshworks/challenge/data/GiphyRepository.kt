@@ -3,6 +3,7 @@ package com.freshworks.challenge.data
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.freshworks.challenge.data.db.AppDatabase
 import com.freshworks.challenge.model.Favourites
 import com.freshworks.challenge.model.GifInfo
 import com.freshworks.challenge.model.dao.FavouritesDao
@@ -21,44 +22,34 @@ import javax.inject.Singleton
  */
 @Singleton
 class GiphyRepository @Inject constructor(
-    private val service: GiphyApiService,
+    private val mService: GiphyApiService,
+    private val mDatabase: AppDatabase,
     private val favouritesDao: FavouritesDao
 ) {
-
-    companion object {
-        const val DEFAULT_PAGE_INDEX = 1
-        const val DEFAULT_PAGE_LIMIT = 25
-        const val NETWORK_PAGE_SIZE = 50
-        var PAGE_OFFSET = 0
-    }
-
     /**
      * Calling the paging source to give results from api calls
      * and returning the results in the form of flow [Flow<PagingData<GifInfo>>]
      */
-    fun letGifImagesFlow(
+    fun letTrendingGifsFlow(
         pagingConfig: PagingConfig = getDefaultPageConfig()
     ): Flow<PagingData<GifInfo>> {
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = { GiphyPagingSource(service) }
+            pagingSourceFactory = { GiphyPagingSource(mService) }
         ).flow
     }
 
     /**
-     * Let's define page size, page size is the only required param, rest is optional
+     * Let's define page size, page size is the only required param
      */
     private fun getDefaultPageConfig(): PagingConfig {
         return PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = true)
     }
 
-    /*Function for Getting My Favourites Gifs*/
-    fun getMyFavourites() = favouritesDao.getMyFavourites()
-
     /**
      * Marking Gif Images To Favourites
      */
-    suspend fun createFavourites(gifInfo: GifInfo) {
+    suspend fun markFavourite(gifInfo: GifInfo) {
         val favouriteGif = Favourites(
             gifInfo.id,
             gifInfo.title,
@@ -71,7 +62,14 @@ class GiphyRepository @Inject constructor(
     /**
      * Removing Gif Images To Favourites
      */
-    suspend fun removeFavourites(gifId: String) {
+    suspend fun unMarkFavourite(gifId: String) {
         favouritesDao.removeFavourite(gifId)
+    }
+
+    companion object {
+        const val DEFAULT_PAGE_INDEX = 1
+        const val DEFAULT_PAGE_LIMIT = 25
+        const val NETWORK_PAGE_SIZE = 50
+        var PAGE_OFFSET = 0
     }
 }

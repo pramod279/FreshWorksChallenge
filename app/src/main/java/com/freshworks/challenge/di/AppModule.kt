@@ -34,7 +34,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun getAppDao(appDatabase: AppDatabase): FavouritesDao {
+    fun getFavouritesDao(appDatabase: AppDatabase): FavouritesDao {
         return appDatabase.getFavouritesDao()
     }
 }
