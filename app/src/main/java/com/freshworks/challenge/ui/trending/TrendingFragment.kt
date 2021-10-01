@@ -8,6 +8,7 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.freshworks.challenge.databinding.FragmentTrendingBinding
 import com.freshworks.challenge.model.GifInfo
@@ -57,19 +58,37 @@ class TrendingFragment : Fragment() {
         /*Search for Gifs Using Search View*/
         binding.svGifs.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(searchGifs: String): Boolean {
-                PAGE_OFFSET = 0
                 binding.svGifs.clearFocus()
-                fetchGifImages(searchGifs, adapter)
+                reloadGifData(searchGifs, adapter)
                 return false
             }
 
             override fun onQueryTextChange(searchGifs: String): Boolean {
-                PAGE_OFFSET = 0
-                if (binding.svGifs.query.isEmpty()) binding.svGifs.clearFocus()
-                fetchGifImages(searchGifs, adapter)
+                reloadGifData(searchGifs, adapter)
                 return false
             }
         })
+
+        /*Swipe Refresh Reload Action*/
+        binding.swipeRefresh.setOnRefreshListener {
+            reloadGifData(String(), adapter)
+        }
+
+        /*Show Initial Progress*/
+        lifecycleScope.launch {
+            adapter.loadStateFlow.collectLatest { loadStates ->
+                binding.swipeRefresh.isRefreshing = loadStates.refresh is LoadState.Loading
+            }
+        }
+    }
+
+    /*Function for Fetching Fresh Gif Info*/
+    private fun reloadGifData(
+        searchGifs: String,
+        adapter: GifImageAdapter
+    ) {
+        PAGE_OFFSET = 0
+        fetchGifImages(searchGifs, adapter)
     }
 
     /*Function for Fetching Trending Gif Images or Search Gif Images If Search Query Present*/

@@ -26,18 +26,24 @@
                 android:queryHint="@string/hint_search_gif" />
         </com.google.android.material.card.MaterialCardView>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvGiphy"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:padding="@dimen/margin_normal"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cvSearchHolder"
-            app:spanCount="@integer/grid_columns"
-            tools:context=".GiphyActivity"
-            tools:listitem="@layout/list_item_giphy_view" />
+            app:layout_constraintTop_toBottomOf="@id/cvSearchHolder">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvGiphy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/margin_normal"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:spanCount="@integer/grid_columns"
+                tools:context=".GiphyActivity"
+                tools:listitem="@layout/list_item_giphy_view" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
