@@ -2,12 +2,12 @@ package com.freshworks.challenge.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.freshworks.challenge.data.GiphyRepository.Companion.DEFAULT_PAGE_INDEX
-import com.freshworks.challenge.data.GiphyRepository.Companion.DEFAULT_PAGE_LIMIT
-import com.freshworks.challenge.data.GiphyRepository.Companion.NETWORK_PAGE_SIZE
-import com.freshworks.challenge.data.GiphyRepository.Companion.PAGE_OFFSET
 import com.freshworks.challenge.model.GifInfo
 import com.freshworks.challenge.repository.GiphyApiService
+import com.freshworks.challenge.utilities.DEFAULT_PAGE_INDEX
+import com.freshworks.challenge.utilities.DEFAULT_PAGE_LIMIT
+import com.freshworks.challenge.utilities.NETWORK_PAGE_SIZE
+import com.freshworks.challenge.utilities.PAGE_OFFSET
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -18,13 +18,15 @@ import java.io.IOException
  * Gif Paging Source Class For Retrieving Paginated Data
  */
 class GiphyPagingSource(
+    searchQuery: String,
     private val service: GiphyApiService,
 ) : PagingSource<Int, GifInfo>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GifInfo> {
         val position = params.key ?: DEFAULT_PAGE_INDEX
         return try {
-            val response = service.getTrendingGifs(DEFAULT_PAGE_LIMIT, PAGE_OFFSET)
+            //val response = service.getTrendingGifs(DEFAULT_PAGE_LIMIT, PAGE_OFFSET)
+            val response = service.searchForGifs("Good Morning", DEFAULT_PAGE_LIMIT, PAGE_OFFSET)
             /*Increment PAGE_OFFSET for Next Fetching Next Set of Gifs*/
             PAGE_OFFSET = response.pagination?.count?.plus(response.pagination.offset!!) ?: 0
             val repos = response.data

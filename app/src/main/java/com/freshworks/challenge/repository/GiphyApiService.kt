@@ -1,8 +1,8 @@
 package com.freshworks.challenge.repository
 
-import com.freshworks.challenge.data.GiphyRepository.Companion.DEFAULT_PAGE_LIMIT
-import com.freshworks.challenge.data.GiphyRepository.Companion.PAGE_OFFSET
 import com.freshworks.challenge.model.GiphyData
+import com.freshworks.challenge.utilities.DEFAULT_PAGE_LIMIT
+import com.freshworks.challenge.utilities.PAGE_OFFSET
 import retrofit2.http.GET
 import retrofit2.http.Query
 

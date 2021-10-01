@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.freshworks.challenge.databinding.FragmentFavouritesBinding
 import com.freshworks.challenge.model.GifInfo
 import com.freshworks.challenge.views.loader.LoaderStateAdapter
-import com.freshworks.challenge.views.trending.TrendingViewModel
+import com.freshworks.challenge.views.trending.GiphyViewModel
 import com.freshworks.challenge.views.trending.adapters.GifImageAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class FavouritesFragment : Fragment() {
     private lateinit var binding: FragmentFavouritesBinding
-    private val trendingGifViewModel: TrendingViewModel by viewModels()
+    private val giphyGifViewModel: GiphyViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,7 +56,7 @@ class FavouritesFragment : Fragment() {
     /*Function for Fetching My Favourite Gif Images*/
     private fun fetchMyFavouriteGifs(adapter: GifImageAdapter) {
         lifecycleScope.launch {
-            trendingGifViewModel.fetchMyFavourites().distinctUntilChanged().collectLatest {
+            giphyGifViewModel.fetchMyFavourites().distinctUntilChanged().collectLatest {
                 adapter.submitData(it)
             }
         }
@@ -65,7 +65,7 @@ class FavouritesFragment : Fragment() {
     /*Mark/UnMark Gif As Favourites*/
     private fun onFavouriteClicked(gifInfo: GifInfo) {
         lifecycleScope.launch {
-            trendingGifViewModel.toggleFavourites(gifInfo)
+            giphyGifViewModel.toggleFavourites(gifInfo)
         }
     }
 }

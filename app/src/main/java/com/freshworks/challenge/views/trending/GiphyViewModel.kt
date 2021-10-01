@@ -17,16 +17,16 @@ import javax.inject.Inject
  * @Author: Pramod Selvaraj
  * @Date: 28.09.2021
  *
- * The ViewModel used in [TrendingFragment].
+ * The ViewModel used in [TrendingFragment] & [FavouritesFragment]
  */
 @HiltViewModel
-class TrendingViewModel @Inject constructor(
+class GiphyViewModel @Inject constructor(
     private val repository: GiphyRepository
 ) : ViewModel() {
 
-    /*Fetch Trending Gif Images Using Pagination*/
-    fun fetchTrendingGifs(): Flow<PagingData<GifInfo>> {
-        return repository.letTrendingGifsFlow()
+    /*Fetch Gif Images Using Pagination Trending & Search*/
+    fun fetchGifImages(searchGifs: String): Flow<PagingData<GifInfo>> {
+        return repository.letGifImagesFlow(searchGifs)
             .map { it.map { it } }
             .cachedIn(viewModelScope)
     }

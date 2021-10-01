@@ -6,6 +6,7 @@ import androidx.paging.PagingData
 import com.freshworks.challenge.model.GifInfo
 import com.freshworks.challenge.model.dao.FavouritesDao
 import com.freshworks.challenge.repository.GiphyApiService
+import com.freshworks.challenge.utilities.NETWORK_PAGE_SIZE
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -23,13 +24,14 @@ class GiphyRepository @Inject constructor(
     private val service: GiphyApiService,
     private val favouritesDao: FavouritesDao
 ) {
-    /*Fetch Trending Gif Images Using Pagination*/
-    fun letTrendingGifsFlow(
+    /*Fetch Gif Images Using Pagination Trending & Search*/
+    fun letGifImagesFlow(
+        searchGifs: String,
         pagingConfig: PagingConfig = getDefaultPageConfig()
     ): Flow<PagingData<GifInfo>> {
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = { GiphyPagingSource(service) }
+            pagingSourceFactory = { GiphyPagingSource(searchGifs, service) }
         ).flow
     }
 
@@ -69,12 +71,5 @@ class GiphyRepository @Inject constructor(
      */
     suspend fun unMarkFavourite(gifId: String) {
         favouritesDao.removeFavourite(gifId)
-    }
-
-    companion object {
-        const val DEFAULT_PAGE_INDEX = 1
-        const val DEFAULT_PAGE_LIMIT = 25
-        const val NETWORK_PAGE_SIZE = 50
-        var PAGE_OFFSET = 0
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -26,7 +27,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class TrendingFragment : Fragment() {
     private lateinit var binding: FragmentTrendingBinding
-    private val trendingGifViewModel: TrendingViewModel by viewModels()
+    private val giphyGifViewModel: GiphyViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,14 +49,32 @@ class TrendingFragment : Fragment() {
         val loaderStateAdapter = LoaderStateAdapter { adapter.retry() }
         binding.rvGiphy.adapter = adapter.withLoadStateFooter(loaderStateAdapter)
 
-        /*Fetch Trending Gif Images*/
-        fetchTrendingGifs(adapter)
+        /*Fetch Trending Gif Images With Default No Search Query*/
+        fetchGifImages(String(), adapter)
+
+        /*Search for Gifs Using Search View*/
+        binding.svGifs.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(searchGifs: String): Boolean {
+                binding.svGifs.clearFocus()
+                fetchGifImages(searchGifs, adapter)
+                return false
+            }
+
+            override fun onQueryTextChange(searchGifs: String): Boolean {
+                /*Fetch Trending List If Search Query Is Empty*/
+                if (binding.svGifs.query.isEmpty()) {
+                    binding.svGifs.clearFocus()
+                    fetchGifImages(searchGifs, adapter)
+                }
+                return false
+            }
+        })
     }
 
-    /*Function for Fetching Trending Gif Images*/
-    private fun fetchTrendingGifs(adapter: GifImageAdapter) {
+    /*Function for Fetching Trending Gif Images or Search Gif Images If Search Query Present*/
+    private fun fetchGifImages(searchGifs: String, adapter: GifImageAdapter) {
         lifecycleScope.launch {
-            trendingGifViewModel.fetchTrendingGifs().distinctUntilChanged().collectLatest {
+            giphyGifViewModel.fetchGifImages(searchGifs).distinctUntilChanged().collectLatest {
                 adapter.submitData(it)
             }
         }
@@ -64,7 +83,7 @@ class TrendingFragment : Fragment() {
     /*Mark/UnMark Gif As Favourites*/
     private fun onFavouriteClicked(gifInfo: GifInfo) {
         lifecycleScope.launch {
-            trendingGifViewModel.toggleFavourites(gifInfo)
+            giphyGifViewModel.toggleFavourites(gifInfo)
         }
     }
 }
