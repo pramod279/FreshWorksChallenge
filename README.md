@@ -52,9 +52,13 @@ This repository contains the FreshWorks Challenge Android app.<br>
 
 ### Demo Video & App Screenshots
 
+#### Giphy Dashboard
+
+https://user-images.githubusercontent.com/16115553/135644388-f7063945-9862-4d03-ace5-edfd0483fe17.mp4
+
 #### Search Results
 
-https://user-images.githubusercontent.com/16115553/135642446-3a0c4d91-de1f-4b9a-80ab-8e614b5d010f.mp4
+https://user-images.githubusercontent.com/16115553/135644407-5ccd0ed7-600e-41fb-89cb-413c8963dc64.mp4
 
 #### Trending Gifs
 
