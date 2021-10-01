@@ -5,7 +5,7 @@ This repository contains the FreshWorks Challenge Android app.<br>
 ## FreshWorks Challenge APK
 
 - [Download Challenge APK]()
-- Press On The [Bookmark] Icon to Add/Remove Gif Item from Favourites
+- Press On The - [Blue Bookmark]() Icon to Add/Remove Gif Item from Favourites
 
 ## System Requirements
 
