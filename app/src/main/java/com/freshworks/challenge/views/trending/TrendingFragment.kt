@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.freshworks.challenge.databinding.FragmentTrendingBinding
 import com.freshworks.challenge.model.GifInfo
+import com.freshworks.challenge.utilities.PAGE_OFFSET
 import com.freshworks.challenge.views.loader.LoaderStateAdapter
 import com.freshworks.challenge.views.trending.adapters.GifImageAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,17 +56,16 @@ class TrendingFragment : Fragment() {
         /*Search for Gifs Using Search View*/
         binding.svGifs.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(searchGifs: String): Boolean {
+                PAGE_OFFSET = 0
                 binding.svGifs.clearFocus()
                 fetchGifImages(searchGifs, adapter)
                 return false
             }
 
             override fun onQueryTextChange(searchGifs: String): Boolean {
-                /*Fetch Trending List If Search Query Is Empty*/
-                if (binding.svGifs.query.isEmpty()) {
-                    binding.svGifs.clearFocus()
-                    fetchGifImages(searchGifs, adapter)
-                }
+                PAGE_OFFSET = 0
+                if (binding.svGifs.query.isEmpty()) binding.svGifs.clearFocus()
+                fetchGifImages(searchGifs, adapter)
                 return false
             }
         })
