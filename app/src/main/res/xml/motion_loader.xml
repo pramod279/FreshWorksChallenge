@@ -24,6 +24,7 @@
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
+            android:id="@+id/tvError"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="visible"
@@ -32,6 +33,7 @@
             motion:layout_constraintTop_toBottomOf="@id/btnRetry" />
 
         <Constraint
+            android:id="@+id/pbLoader"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:visibility="gone"
@@ -53,6 +55,7 @@
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
+            android:id="@+id/tvError"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="gone"
@@ -61,6 +64,7 @@
             motion:layout_constraintTop_toBottomOf="@id/btnRetry" />
 
         <Constraint
+            android:id="@+id/pbLoader"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:visibility="visible"
