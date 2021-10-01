@@ -37,7 +37,7 @@ private fun showProgress(view: ImageView): CircularProgressDrawable {
 @BindingAdapter("toggleFavourites")
 fun toggleFavourites(view: LottieAnimationView, isFavourite: Boolean) {
     when {
-        !isFavourite -> view.playAnimation()
+        isFavourite -> view.playAnimation()
         else -> view.cancelAnimation()
     }
 }

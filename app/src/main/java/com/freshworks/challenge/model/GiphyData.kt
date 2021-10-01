@@ -28,7 +28,8 @@ data class Pagination(
 data class GifInfo(
     @PrimaryKey @ColumnInfo(name = "id") val id: String,
     @ColumnInfo(name = "title") val title: String?,
-    @Embedded(prefix = "gif_") val images: GifImages
+    @Embedded(prefix = "gif_") val images: GifImages,
+    var isFavourite: Boolean
 )
 
 data class GifImages(
