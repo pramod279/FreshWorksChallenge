@@ -1,4 +1,4 @@
-package com.freshworks.challenge.views.favourites
+package com.freshworks.challenge.ui.favourites
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +10,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.freshworks.challenge.databinding.FragmentFavouritesBinding
 import com.freshworks.challenge.model.GifInfo
-import com.freshworks.challenge.views.loader.LoaderStateAdapter
-import com.freshworks.challenge.views.trending.GiphyViewModel
-import com.freshworks.challenge.views.trending.adapters.GifImageAdapter
+import com.freshworks.challenge.ui.common.LoaderStateAdapter
+import com.freshworks.challenge.ui.trending.adapters.GifImageAdapter
+import com.freshworks.challenge.viewmodel.GiphyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged

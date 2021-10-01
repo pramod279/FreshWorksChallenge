@@ -1,4 +1,4 @@
-package com.freshworks.challenge.views.dashboard
+package com.freshworks.challenge.ui.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,9 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.freshworks.challenge.R
 import com.freshworks.challenge.databinding.FragmentDashboardBinding
-import com.freshworks.challenge.utilities.FAVOURITES_PAGE_INDEX
-import com.freshworks.challenge.utilities.TRENDING_PAGE_INDEX
-import com.freshworks.challenge.views.dashboard.adapers.TabsPagerAdapter
+import com.freshworks.challenge.ui.dashboard.adapers.TabsPagerAdapter
+import com.freshworks.challenge.utilities.Constants.FAVOURITES_PAGE_INDEX
+import com.freshworks.challenge.utilities.Constants.TRENDING_PAGE_INDEX
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -1,14 +1,14 @@
-package com.freshworks.challenge.data
+package com.freshworks.challenge.data.remote
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.freshworks.challenge.model.GifInfo
 import com.freshworks.challenge.model.GiphyData
-import com.freshworks.challenge.repository.GiphyApiService
-import com.freshworks.challenge.utilities.DEFAULT_PAGE_INDEX
-import com.freshworks.challenge.utilities.DEFAULT_PAGE_LIMIT
-import com.freshworks.challenge.utilities.NETWORK_PAGE_SIZE
-import com.freshworks.challenge.utilities.PAGE_OFFSET
+import com.freshworks.challenge.network.GiphyApiService
+import com.freshworks.challenge.utilities.Constants.DEFAULT_PAGE_INDEX
+import com.freshworks.challenge.utilities.Constants.DEFAULT_PAGE_LIMIT
+import com.freshworks.challenge.utilities.Constants.NETWORK_PAGE_SIZE
+import com.freshworks.challenge.utilities.Constants.PAGE_OFFSET
 import retrofit2.HttpException
 import java.io.IOException
 

@@ -1,10 +1,10 @@
 package com.freshworks.challenge.di
 
 import android.app.Application
-import com.freshworks.challenge.data.db.AppDatabase
-import com.freshworks.challenge.model.dao.FavouritesDao
-import com.freshworks.challenge.repository.GiphyApiService
-import com.freshworks.challenge.repository.RemoteInjector
+import com.freshworks.challenge.db.AppDatabase
+import com.freshworks.challenge.db.FavouritesDao
+import com.freshworks.challenge.network.GiphyApiService
+import com.freshworks.challenge.network.RemoteInjector
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

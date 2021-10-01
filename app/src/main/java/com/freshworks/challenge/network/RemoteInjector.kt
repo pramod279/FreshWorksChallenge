@@ -1,7 +1,7 @@
-package com.freshworks.challenge.repository
+package com.freshworks.challenge.network
 
 import com.freshworks.challenge.BuildConfig
-import com.freshworks.challenge.repository.ApiUrls.API_KEY
+import com.freshworks.challenge.network.ApiUrls.API_KEY
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

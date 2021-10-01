@@ -1,12 +1,11 @@
-package com.freshworks.challenge.data.db
+package com.freshworks.challenge.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.freshworks.challenge.model.GifInfo
-import com.freshworks.challenge.model.dao.FavouritesDao
-import com.freshworks.challenge.utilities.DATABASE_NAME
+import com.freshworks.challenge.utilities.Constants.DATABASE_NAME
 
 /**
  * @Author: Pramod Selvaraj

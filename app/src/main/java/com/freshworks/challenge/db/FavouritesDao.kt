@@ -1,4 +1,4 @@
-package com.freshworks.challenge.model.dao
+package com.freshworks.challenge.db
 
 import androidx.paging.PagingSource
 import androidx.room.Dao

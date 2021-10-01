@@ -1,4 +1,4 @@
-package com.freshworks.challenge.views.trending
+package com.freshworks.challenge.ui.trending
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +11,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.freshworks.challenge.databinding.FragmentTrendingBinding
 import com.freshworks.challenge.model.GifInfo
-import com.freshworks.challenge.utilities.PAGE_OFFSET
-import com.freshworks.challenge.views.loader.LoaderStateAdapter
-import com.freshworks.challenge.views.trending.adapters.GifImageAdapter
+import com.freshworks.challenge.ui.common.LoaderStateAdapter
+import com.freshworks.challenge.ui.trending.adapters.GifImageAdapter
+import com.freshworks.challenge.utilities.Constants.PAGE_OFFSET
+import com.freshworks.challenge.viewmodel.GiphyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged

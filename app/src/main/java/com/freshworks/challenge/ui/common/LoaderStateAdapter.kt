@@ -1,4 +1,4 @@
-package com.freshworks.challenge.views.loader
+package com.freshworks.challenge.ui.common
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,4 +1,4 @@
-package com.freshworks.challenge.repository
+package com.freshworks.challenge.network
 
 /**
  * @Author: Pramod Selvaraj

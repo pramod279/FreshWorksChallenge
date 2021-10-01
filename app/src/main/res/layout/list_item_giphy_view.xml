@@ -11,7 +11,7 @@
 
         <variable
             name="favourite"
-            type="com.freshworks.challenge.views.trending.adapters.GifImageAdapter.FavouritesClickListener" />
+            type="com.freshworks.challenge.ui.trending.adapters.GifImageAdapter.FavouritesClickListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

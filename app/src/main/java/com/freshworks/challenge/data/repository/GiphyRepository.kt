@@ -1,12 +1,13 @@
-package com.freshworks.challenge.data
+package com.freshworks.challenge.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.freshworks.challenge.data.remote.GiphyPagingSource
+import com.freshworks.challenge.db.FavouritesDao
 import com.freshworks.challenge.model.GifInfo
-import com.freshworks.challenge.model.dao.FavouritesDao
-import com.freshworks.challenge.repository.GiphyApiService
-import com.freshworks.challenge.utilities.NETWORK_PAGE_SIZE
+import com.freshworks.challenge.network.GiphyApiService
+import com.freshworks.challenge.utilities.Constants.NETWORK_PAGE_SIZE
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton

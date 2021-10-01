@@ -1,12 +1,12 @@
-package com.freshworks.challenge.views.trending.adapters
+package com.freshworks.challenge.ui.trending.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.freshworks.challenge.BaseViewHolder
 import com.freshworks.challenge.databinding.ListItemGiphyViewBinding
 import com.freshworks.challenge.model.GifInfo
+import com.freshworks.challenge.ui.common.BaseViewHolder
 
 /**
  * @Author: Pramod Selvaraj

@@ -1,11 +1,11 @@
-package com.freshworks.challenge.views.trending
+package com.freshworks.challenge.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
-import com.freshworks.challenge.data.GiphyRepository
+import com.freshworks.challenge.data.repository.GiphyRepository
 import com.freshworks.challenge.model.GifInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow

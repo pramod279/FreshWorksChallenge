@@ -6,19 +6,19 @@
 
     <fragment
         android:id="@+id/dashboard_fragment"
-        android:name="com.freshworks.challenge.views.dashboard.DashboardFragment"
+        android:name="com.freshworks.challenge.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/trending_fragment"
-        android:name="com.freshworks.challenge.views.trending.TrendingFragment"
+        android:name="com.freshworks.challenge.ui.trending.TrendingFragment"
         android:label="@string/trending_fragment_label"
         tools:layout="@layout/fragment_trending" />
 
     <fragment
         android:id="@+id/favourites_fragment"
-        android:name="com.freshworks.challenge.views.favourites.FavouritesFragment"
+        android:name="com.freshworks.challenge.ui.favourites.FavouritesFragment"
         android:label="@string/favourites_fragment_label"
         tools:layout="@layout/fragment_favourites" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.freshworks.challenge
+package com.freshworks.challenge.ui.common
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
