@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.freshworks.challenge.model.GifInfo
+import com.freshworks.challenge.data.entities.GifInfo
 import com.freshworks.challenge.utilities.Constants.DATABASE_NAME
 
 /**

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.freshworks.challenge.databinding.ListItemGiphyViewBinding
-import com.freshworks.challenge.model.GifInfo
+import com.freshworks.challenge.data.entities.GifInfo
 import com.freshworks.challenge.ui.common.BaseViewHolder
 
 /**

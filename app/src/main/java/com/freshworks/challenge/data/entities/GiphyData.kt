@@ -1,4 +1,4 @@
-package com.freshworks.challenge.model
+package com.freshworks.challenge.data.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Embedded

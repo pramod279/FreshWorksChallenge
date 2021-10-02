@@ -2,8 +2,8 @@ package com.freshworks.challenge.data.remote
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.freshworks.challenge.model.GifInfo
-import com.freshworks.challenge.model.GiphyData
+import com.freshworks.challenge.data.entities.GifInfo
+import com.freshworks.challenge.data.entities.GiphyData
 import com.freshworks.challenge.network.GiphyApiService
 import com.freshworks.challenge.utilities.Constants.DEFAULT_PAGE_INDEX
 import com.freshworks.challenge.utilities.Constants.DEFAULT_PAGE_LIMIT

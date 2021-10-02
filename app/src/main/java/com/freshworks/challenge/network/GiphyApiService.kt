@@ -1,6 +1,6 @@
 package com.freshworks.challenge.network
 
-import com.freshworks.challenge.model.GiphyData
+import com.freshworks.challenge.data.entities.GiphyData
 import com.freshworks.challenge.utilities.Constants.DEFAULT_PAGE_LIMIT
 import com.freshworks.challenge.utilities.Constants.PAGE_OFFSET
 import retrofit2.http.GET

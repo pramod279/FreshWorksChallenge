@@ -7,7 +7,7 @@
 
         <variable
             name="gifImage"
-            type="com.freshworks.challenge.model.GifInfo" />
+            type="com.freshworks.challenge.data.entities.GifInfo" />
 
         <variable
             name="favourite"

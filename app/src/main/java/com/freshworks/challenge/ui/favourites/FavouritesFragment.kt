@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.freshworks.challenge.databinding.FragmentFavouritesBinding
-import com.freshworks.challenge.model.GifInfo
+import com.freshworks.challenge.data.entities.GifInfo
 import com.freshworks.challenge.ui.common.LoaderStateAdapter
 import com.freshworks.challenge.ui.trending.adapters.GifImageAdapter
 import com.freshworks.challenge.viewmodel.GiphyViewModel

@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.freshworks.challenge.data.remote.GiphyPagingSource
 import com.freshworks.challenge.db.FavouritesDao
-import com.freshworks.challenge.model.GifInfo
+import com.freshworks.challenge.data.entities.GifInfo
 import com.freshworks.challenge.network.GiphyApiService
 import com.freshworks.challenge.utilities.Constants.NETWORK_PAGE_SIZE
 import kotlinx.coroutines.flow.Flow
