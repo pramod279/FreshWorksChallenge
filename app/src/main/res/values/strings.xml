@@ -7,6 +7,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="tab_trending">Trending</string>
     <string name="tab_favourites">Favourites</string>
+    <string name="toggle_favourites">Favourites Toggled</string>
     <string name="desc_giphy">Giphy</string>
     <string name="hint_search_gif">Search GIFs</string>
     <string name="button_retry">Retry</string>
