@@ -12,7 +12,7 @@ import com.freshworks.challenge.data.entities.GifInfo
 import com.freshworks.challenge.databinding.FragmentFavouritesBinding
 import com.freshworks.challenge.ui.common.LoaderStateAdapter
 import com.freshworks.challenge.ui.trending.adapters.GifImageAdapter
-import com.freshworks.challenge.ui.trending.adapters.GifImageAdapter.FavouritesClickListener
+import com.freshworks.challenge.ui.trending.adapters.GiphyViewHolder.FavouritesClickListener
 import com.freshworks.challenge.utilities.Constants.GRID_COLUMNS
 import com.freshworks.challenge.viewmodel.GiphyViewModel
 import dagger.hilt.android.AndroidEntryPoint

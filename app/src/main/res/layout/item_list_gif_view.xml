@@ -11,7 +11,7 @@
 
         <variable
             name="favourite"
-            type="com.freshworks.challenge.ui.trending.adapters.GifImageAdapter.FavouritesClickListener" />
+            type="com.freshworks.challenge.ui.trending.adapters.GiphyViewHolder.FavouritesClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,7 +44,7 @@
                 android:layout_width="@dimen/fav_button_width_small"
                 android:layout_height="@dimen/fav_button_height_small"
                 android:layout_gravity="end"
-                android:onClick="@{() -> favourite.onClick(gifImage)}"
+                android:onClick="@{(view) -> favourite.onToggle(view, gifImage)}"
                 app:lottie_autoPlay="false"
                 app:lottie_loop="false"
                 app:lottie_rawRes="@raw/favourites" />

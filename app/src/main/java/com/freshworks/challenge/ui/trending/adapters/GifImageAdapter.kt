@@ -9,6 +9,7 @@ import com.freshworks.challenge.data.entities.GifInfo
 import com.freshworks.challenge.databinding.ItemGridGifViewBinding
 import com.freshworks.challenge.databinding.ItemListGifViewBinding
 import com.freshworks.challenge.ui.common.enums.ViewType
+import com.freshworks.challenge.ui.trending.adapters.GiphyViewHolder.FavouritesClickListener
 import com.freshworks.challenge.utilities.Constants.GRID_COLUMNS
 
 /**
@@ -61,10 +62,5 @@ class GifImageAdapter(
             is GiphyViewHolder.GridItemViewHolder -> holder.bind(gifImage as GifInfo)
             is GiphyViewHolder.ListItemViewHolder -> holder.bind(gifImage as GifInfo)
         }
-    }
-
-    /*Favourites Gif Click Listener*/
-    class FavouritesClickListener(val clickListener: (gifInfo: GifInfo) -> Unit) {
-        fun onClick(gifInfo: GifInfo) = clickListener(gifInfo)
     }
 }

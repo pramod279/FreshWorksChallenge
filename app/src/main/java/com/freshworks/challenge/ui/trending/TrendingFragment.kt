@@ -15,7 +15,7 @@ import com.freshworks.challenge.data.entities.GifInfo
 import com.freshworks.challenge.databinding.FragmentTrendingBinding
 import com.freshworks.challenge.ui.common.LoaderStateAdapter
 import com.freshworks.challenge.ui.trending.adapters.GifImageAdapter
-import com.freshworks.challenge.ui.trending.adapters.GifImageAdapter.FavouritesClickListener
+import com.freshworks.challenge.ui.trending.adapters.GiphyViewHolder.FavouritesClickListener
 import com.freshworks.challenge.utilities.Constants.GRID_COLUMNS
 import com.freshworks.challenge.utilities.Constants.LIST_COLUMN
 import com.freshworks.challenge.utilities.Constants.PAGE_OFFSET
