@@ -1,10 +1,11 @@
-package com.freshworks.challenge
+package com.freshworks.challenge.ui.common
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
+import com.freshworks.challenge.R
 
 /**
  * @Author: Pramod Selvaraj

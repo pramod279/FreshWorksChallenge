@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
-import com.freshworks.challenge.data.repository.GiphyRepository
 import com.freshworks.challenge.data.entities.GifInfo
+import com.freshworks.challenge.data.repository.GiphyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

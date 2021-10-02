@@ -59,7 +59,7 @@ https://user-images.githubusercontent.com/16115553/135644388-f7063945-9862-4d03-
 
 #### Search Results
 
-https://user-images.githubusercontent.com/16115553/135644407-5ccd0ed7-600e-41fb-89cb-413c8963dc64.mp4
+https://user-images.githubusercontent.com/16115553/135720534-8cee4d53-e362-41d2-a106-0fedb99a64e2.mp4
 
 #### Trending Gifs
 
@@ -67,7 +67,7 @@ https://user-images.githubusercontent.com/16115553/135644407-5ccd0ed7-600e-41fb-
 
 #### Search Results
 
-![2 - Search Results](https://user-images.githubusercontent.com/16115553/135642422-4aeaa3b4-edbe-489c-a55c-fe16bf85f6ea.png)
+![2 - Search Results](https://user-images.githubusercontent.com/16115553/135720541-32fb280c-5ae7-4d34-9ec4-a294b3c6f410.png)
 
 #### My Favourites
 

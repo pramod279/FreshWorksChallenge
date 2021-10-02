@@ -8,10 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.freshworks.challenge.databinding.FragmentFavouritesBinding
 import com.freshworks.challenge.data.entities.GifInfo
+import com.freshworks.challenge.databinding.FragmentFavouritesBinding
 import com.freshworks.challenge.ui.common.LoaderStateAdapter
 import com.freshworks.challenge.ui.trending.adapters.GifImageAdapter
+import com.freshworks.challenge.ui.trending.adapters.GifImageAdapter.FavouritesClickListener
+import com.freshworks.challenge.utilities.Constants.GRID_COLUMNS
 import com.freshworks.challenge.viewmodel.GiphyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -29,28 +31,37 @@ class FavouritesFragment : Fragment() {
     private lateinit var binding: FragmentFavouritesBinding
     private val giphyGifViewModel: GiphyViewModel by viewModels()
 
+    private lateinit var layoutManager: GridLayoutManager
+    private lateinit var adapter: GifImageAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFavouritesBinding.inflate(inflater, container, false)
-        subscribeUi(binding)
+        subscribeUi()
         return binding.root
     }
 
-    private fun subscribeUi(binding: FragmentFavouritesBinding) {
-        binding.rvGiphy.layoutManager = GridLayoutManager(context, 2)
-        /*Gif Images Adapter For Displaying Gif Images*/
-        val adapter = GifImageAdapter(GifImageAdapter.FavouritesClickListener {
+    private fun subscribeUi() {
+        /*Initialise Favourites Recycler View*/
+        initGifRecyclerView()
+        /*Fetch My Favourite Gifs Images*/
+        fetchMyFavouriteGifs(adapter)
+    }
+
+    /*Function for Initialising Gif Recycler View*/
+    private fun initGifRecyclerView() {
+        layoutManager = GridLayoutManager(context, GRID_COLUMNS)
+        binding.rvGiphy.layoutManager = layoutManager
+        /*Gif Images Adapter For Displaying My Favourites*/
+        adapter = GifImageAdapter(layoutManager, FavouritesClickListener {
             onFavouriteClicked(it)
         })
         /*Loader Adapter For Progress & Retry Event*/
         val loaderStateAdapter = LoaderStateAdapter { adapter.retry() }
         binding.rvGiphy.adapter = adapter.withLoadStateFooter(loaderStateAdapter)
-
-        /*Fetch My Favourite Gifs Images*/
-        fetchMyFavouriteGifs(adapter)
     }
 
     /*Function for Fetching My Favourite Gif Images*/

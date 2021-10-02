@@ -7,6 +7,8 @@ package com.freshworks.challenge.utilities
  * Constants used throughout the app.
  */
 object Constants {
+    const val LIST_COLUMN = 1
+    const val GRID_COLUMNS = 2
     const val TRENDING_PAGE_INDEX = 0
     const val FAVOURITES_PAGE_INDEX = 1
     const val DATABASE_NAME = "favourites-db"

@@ -4,9 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.freshworks.challenge.databinding.ListItemGiphyViewBinding
+import androidx.recyclerview.widget.GridLayoutManager
 import com.freshworks.challenge.data.entities.GifInfo
-import com.freshworks.challenge.ui.common.BaseViewHolder
+import com.freshworks.challenge.databinding.ItemGridGifViewBinding
+import com.freshworks.challenge.databinding.ItemListGifViewBinding
+import com.freshworks.challenge.ui.common.enums.ViewType
+import com.freshworks.challenge.utilities.Constants.GRID_COLUMNS
 
 /**
  * @Author: Pramod Selvaraj
@@ -14,8 +17,11 @@ import com.freshworks.challenge.ui.common.BaseViewHolder
  *
  * GIF Image Adapter Class For Loading All Gif Images
  */
-class GifImageAdapter(private val clickListener: FavouritesClickListener) :
-    PagingDataAdapter<GifInfo, BaseViewHolder>(REPO_COMPARATOR) {
+class GifImageAdapter(
+    private val layoutManager: GridLayoutManager,
+    private val clickListener: FavouritesClickListener
+) :
+    PagingDataAdapter<GifInfo, GiphyViewHolder>(REPO_COMPARATOR) {
     /*Diff Util For Updating The Recycler View If Any Change In Data*/
     companion object {
         private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<GifInfo>() {
@@ -27,23 +33,34 @@ class GifImageAdapter(private val clickListener: FavouritesClickListener) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        return BaseViewHolder(
-            ListItemGiphyViewBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false
-            )
-        )
+    override fun getItemViewType(position: Int): Int {
+        return if (layoutManager.spanCount == GRID_COLUMNS)
+            ViewType.GRID.ordinal else ViewType.LIST.ordinal
     }
 
-    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GiphyViewHolder {
+        return when (viewType) {
+            ViewType.GRID.ordinal -> GiphyViewHolder.GridItemViewHolder(
+                ItemGridGifViewBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
+                ), clickListener
+            )
+            else -> GiphyViewHolder.ListItemViewHolder(
+                ItemListGifViewBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
+                ), clickListener
+            )
+        }
+    }
+
+    override fun onBindViewHolder(holder: GiphyViewHolder, position: Int) {
         /*Binding The Current Item To The View*/
         val gifImage = getItem(position)
 
-        val itemBinding = holder.binding as ListItemGiphyViewBinding
-
-        itemBinding.gifImage = gifImage
-        itemBinding.favourite = clickListener
-        itemBinding.executePendingBindings()
+        when (holder) {
+            is GiphyViewHolder.GridItemViewHolder -> holder.bind(gifImage as GifInfo)
+            is GiphyViewHolder.ListItemViewHolder -> holder.bind(gifImage as GifInfo)
+        }
     }
 
     /*Favourites Gif Click Listener*/
