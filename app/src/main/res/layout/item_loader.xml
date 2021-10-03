@@ -13,7 +13,7 @@
         android:backgroundTint="@color/yellow_500"
         android:text="@string/button_retry"
         android:textColor="@android:color/black"
-        app:cornerRadius="10dp"
+        app:cornerRadius="@dimen/card_corner_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
         android:gravity="center_horizontal"
         android:text="@string/label_error"
         android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Header"
-        android:textSize="12sp"
+        android:textSize="@dimen/text_size_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnRetry" />

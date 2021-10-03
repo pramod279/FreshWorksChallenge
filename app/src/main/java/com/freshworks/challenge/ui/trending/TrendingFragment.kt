@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
+import com.freshworks.challenge.R
 import com.freshworks.challenge.data.entities.GifInfo
 import com.freshworks.challenge.databinding.FragmentTrendingBinding
 import com.freshworks.challenge.ui.common.LoaderStateAdapter
@@ -60,8 +62,8 @@ class TrendingFragment : Fragment() {
         fetchGifImages()
         /*Swipe Refresh Reload Action*/
         swipeRefreshGifs()
-        /*Show Initial Progress*/
-        showProgressLoader()
+        /*Track Data Flow Progress States*/
+        trackProgressStates()
     }
 
     /*Function for Initialising Gif Recycler View*/
@@ -72,12 +74,13 @@ class TrendingFragment : Fragment() {
         adapter = GifImageAdapter(layoutManager, FavouritesClickListener {
             onFavouriteClicked(it)
         })
-        /*Loader Adapter For Progress & Retry Event*/
-        val loaderStateAdapter = LoaderStateAdapter { adapter.retry() }
-        binding.rvGiphy.adapter = adapter.withLoadStateFooter(loaderStateAdapter)
+        /*Loader Adapter For Indicating Error & Retry Events*/
+        binding.rvGiphy.adapter = adapter.withLoadStateFooter(
+            footer = LoaderStateAdapter { adapter.retry() }
+        )
     }
 
-    /*Search For Gifs*/
+    /*Search For Gif Images*/
     private fun gifSearcher() {
         binding.svGifs.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(searchQuery: String): Boolean {
@@ -128,19 +131,35 @@ class TrendingFragment : Fragment() {
         }
     }
 
-    /*Show Progress Loader*/
-    private fun showProgressLoader() {
-        lifecycleScope.launch {
-            adapter.loadStateFlow.collectLatest { loadStates ->
-                binding.swipeRefresh.isRefreshing = loadStates.refresh is LoadState.Loading
-            }
-        }
-    }
-
     /*Mark/UnMark Gif As Favourites*/
     private fun onFavouriteClicked(gifInfo: GifInfo) {
         lifecycleScope.launch {
             giphyViewModel.toggleFavourites(gifInfo)
         }
+    }
+
+    /*Function for Tracking The Progress States*/
+    private fun trackProgressStates() {
+        lifecycleScope.launch {
+            adapter.addLoadStateListener { loadState ->
+                // Show loading spinner during initial load or refresh
+                binding.swipeRefresh.isRefreshing = loadState.refresh is LoadState.Loading
+                // Only show the list if refresh succeeds
+                binding.rvGiphy.isVisible = loadState.refresh is LoadState.NotLoading
+                // Show the error state if initial load or refresh fails
+                binding.tvError.isVisible = loadState.refresh is LoadState.Error
+                binding.tvError.text = getString(R.string.label_error)
+                // Display Empty View For No Records Found*/
+                val isEmptyList =
+                    loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
+                if (isEmptyList) showEmptyState()
+            }
+        }
+    }
+
+    /*Function for Displaying Empty View*/
+    private fun showEmptyState() {
+        binding.tvError.isVisible = true
+        binding.tvError.text = getString(R.string.no_records_found)
     }
 }

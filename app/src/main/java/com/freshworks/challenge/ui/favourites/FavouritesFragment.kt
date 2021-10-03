@@ -58,9 +58,10 @@ class FavouritesFragment : Fragment() {
         adapter = GifImageAdapter(layoutManager, FavouritesClickListener {
             onFavouriteClicked(it)
         })
-        /*Loader Adapter For Progress & Retry Event*/
-        val loaderStateAdapter = LoaderStateAdapter { adapter.retry() }
-        binding.rvGiphy.adapter = adapter.withLoadStateFooter(loaderStateAdapter)
+        /*Loader Adapter For Indicating Error & Retry Events*/
+        binding.rvGiphy.adapter = adapter.withLoadStateFooter(
+            footer = LoaderStateAdapter { adapter.retry() }
+        )
     }
 
     /*Function for Fetching My Favourite Gif Images*/

@@ -13,6 +13,8 @@ import com.freshworks.challenge.R
 /**
  * @Author: Pramod Selvaraj
  * @Date: 29.09.2021
+ *
+ * Loader State Adapter For Indicating Error Events
  */
 class LoaderStateAdapter(private val retry: () -> Unit) :
     LoadStateAdapter<LoaderStateAdapter.LoaderViewHolder>() {
@@ -32,18 +34,17 @@ class LoaderStateAdapter(private val retry: () -> Unit) :
 
         companion object {
             fun getInstance(parent: ViewGroup, retry: () -> Unit): LoaderViewHolder {
-                val inflater = LayoutInflater.from(parent.context)
-                val view = inflater.inflate(R.layout.item_loader, parent, false)
-                return LoaderViewHolder(view, retry)
+                return LoaderViewHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.item_loader, parent, false), retry
+                )
             }
         }
 
         private val motionLayout: MotionLayout = view.findViewById(R.id.mlLoader)
 
         init {
-            view.findViewById<Button>(R.id.btnRetry).setOnClickListener {
-                retry()
-            }
+            view.findViewById<Button>(R.id.btnRetry).setOnClickListener { retry() }
         }
 
         fun bind(loadState: LoadState) {
