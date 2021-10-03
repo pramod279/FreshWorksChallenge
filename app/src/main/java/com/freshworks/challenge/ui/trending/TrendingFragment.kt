@@ -20,6 +20,7 @@ import com.freshworks.challenge.utilities.Constants.GRID_COLUMNS
 import com.freshworks.challenge.utilities.Constants.LIST_COLUMN
 import com.freshworks.challenge.utilities.Constants.PAGE_OFFSET
 import com.freshworks.challenge.utilities.shortToast
+import com.freshworks.challenge.utilities.snapToPosition
 import com.freshworks.challenge.viewmodel.GiphyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -111,6 +112,7 @@ class TrendingFragment : Fragment() {
         if (searchGifs.isNotEmpty()) layoutManager.spanCount =
             LIST_COLUMN else layoutManager.spanCount = GRID_COLUMNS
         adapter.notifyItemRangeChanged(0, adapter.itemCount)
+        binding.rvGiphy.snapToPosition(0)
     }
 
     /*Function for Fetching Trending Gif Images or Search Gif Images If Search Query Present*/
