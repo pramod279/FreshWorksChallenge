@@ -38,6 +38,9 @@ class TrendingFragment : Fragment() {
     private lateinit var layoutManager: GridLayoutManager
     private lateinit var adapter: GifImageAdapter
 
+    /*Search Gif Query*/
+    private var searchGifs: String = String()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,8 +56,8 @@ class TrendingFragment : Fragment() {
         initGifRecyclerView()
         /*Search for Gifs Using Search View*/
         gifSearcher()
-        /*Fetch Trending Gif Images Without Search Query*/
-        fetchGifImages(String())
+        /*Fetch Trending Gif Images*/
+        fetchGifImages()
         /*Swipe Refresh Reload Action*/
         swipeRefreshGifs()
         /*Show Initial Progress*/
@@ -77,14 +80,16 @@ class TrendingFragment : Fragment() {
     /*Search For Gifs*/
     private fun gifSearcher() {
         binding.svGifs.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(searchGifs: String): Boolean {
+            override fun onQueryTextSubmit(searchQuery: String): Boolean {
                 binding.svGifs.clearFocus()
-                reloadGifData(searchGifs)
+                searchGifs = searchQuery
+                reloadGifData()
                 return false
             }
 
-            override fun onQueryTextChange(searchGifs: String): Boolean {
-                reloadGifData(searchGifs)
+            override fun onQueryTextChange(searchQuery: String): Boolean {
+                searchGifs = searchQuery
+                reloadGifData()
                 return false
             }
         })
@@ -95,27 +100,27 @@ class TrendingFragment : Fragment() {
         binding.swipeRefresh.setOnRefreshListener {
             binding.svGifs.setQuery(String(), false)
             binding.svGifs.clearFocus()
-            reloadGifData(String())
+            reloadGifData()
         }
     }
 
     /*Function for Fetching Fresh Gif Info*/
-    private fun reloadGifData(searchGifs: String) {
+    private fun reloadGifData() {
         PAGE_OFFSET = 0
-        fetchGifImages(searchGifs)
-        layoutManager(searchGifs)
+        fetchGifImages()
+        giphyLayoutManager()
     }
 
     /*Reload Layout Manager When Search Action Performed*/
-    private fun layoutManager(searchGifs: String) {
-        if (searchGifs.isNotEmpty()) layoutManager.spanCount =
-            LIST_COLUMN else layoutManager.spanCount = GRID_COLUMNS
+    private fun giphyLayoutManager() {
+        if (searchGifs.isEmpty()) layoutManager.spanCount =
+            GRID_COLUMNS else layoutManager.spanCount = LIST_COLUMN
         adapter.notifyItemRangeChanged(0, adapter.itemCount)
         binding.rvGiphy.snapToPosition(0)
     }
 
     /*Function for Fetching Trending Gif Images or Search Gif Images If Search Query Present*/
-    private fun fetchGifImages(searchGifs: String) {
+    private fun fetchGifImages() {
         lifecycleScope.launch {
             giphyViewModel.fetchGifImages(searchGifs).collectLatest {
                 adapter.submitData(it)
