@@ -32,7 +32,7 @@ class GiphyRepository @Inject constructor(
     ): Flow<PagingData<GifInfo>> {
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = { GiphyPagingSource(searchGifs, service) }
+            pagingSourceFactory = { GiphyPagingSource(searchGifs, service, favouritesDao) }
         ).flow
     }
 

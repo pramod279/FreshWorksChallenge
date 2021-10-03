@@ -4,11 +4,15 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.freshworks.challenge.data.entities.GifInfo
 import com.freshworks.challenge.data.entities.GiphyData
+import com.freshworks.challenge.db.FavouritesDao
 import com.freshworks.challenge.network.GiphyApiService
 import com.freshworks.challenge.utilities.Constants.DEFAULT_PAGE_INDEX
 import com.freshworks.challenge.utilities.Constants.DEFAULT_PAGE_LIMIT
 import com.freshworks.challenge.utilities.Constants.NETWORK_PAGE_SIZE
 import com.freshworks.challenge.utilities.Constants.PAGE_OFFSET
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -21,6 +25,7 @@ import java.io.IOException
 class GiphyPagingSource(
     private val searchQuery: String,
     private val service: GiphyApiService,
+    private val favouritesDao: FavouritesDao,
 ) : PagingSource<Int, GifInfo>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GifInfo> {
@@ -33,8 +38,8 @@ class GiphyPagingSource(
             }
             /*Increment PAGE_OFFSET for Next Fetching Next Set of Gifs*/
             PAGE_OFFSET = response.pagination?.count?.plus(response.pagination.offset!!) ?: 0
-            val repos = response.data
-            val nextKey = if (repos.isEmpty()) {
+            val gifImages = gifFavImages(response)
+            val nextKey = if (gifImages.isEmpty()) {
                 null
             } else {
                 // initial load size = 3 * NETWORK_PAGE_SIZE
@@ -42,7 +47,7 @@ class GiphyPagingSource(
                 position + (params.loadSize / NETWORK_PAGE_SIZE)
             }
             LoadResult.Page(
-                data = repos,
+                data = gifImages,
                 prevKey = if (position == DEFAULT_PAGE_INDEX) null else position - 1,
                 nextKey = nextKey
             )
@@ -62,5 +67,16 @@ class GiphyPagingSource(
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
+    }
+
+    /*Function for Returning Gif Images With Favourites Status*/
+    private fun gifFavImages(response: GiphyData): List<GifInfo> {
+        val gifImages = response.data
+        CoroutineScope(Dispatchers.IO).launch(block = {
+            gifImages.forEach { gifImage ->
+                gifImage.isFavourite = favouritesDao.isFavourite(gifImage.id)
+            }
+        })
+        return gifImages
     }
 }

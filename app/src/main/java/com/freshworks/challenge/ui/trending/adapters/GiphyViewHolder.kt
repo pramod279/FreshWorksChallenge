@@ -7,6 +7,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.freshworks.challenge.data.entities.GifInfo
 import com.freshworks.challenge.databinding.ItemGridGifViewBinding
 import com.freshworks.challenge.databinding.ItemListGifViewBinding
+import com.freshworks.challenge.ui.common.favouriteMarker
 import com.freshworks.challenge.utilities.vibrate
 
 
@@ -17,7 +18,6 @@ import com.freshworks.challenge.utilities.vibrate
  * Gif ViewHolder For Adapter ViewDataBinding
  */
 sealed class GiphyViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder(binding.root) {
-
     /*Grid Item View Holder for Trending Gifs*/
     class GridItemViewHolder(
         private val binding: ItemGridGifViewBinding,
@@ -42,10 +42,11 @@ sealed class GiphyViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder(bin
 
     /*Favourites Gif Click Listener*/
     class FavouritesClickListener(val clickListener: (gifInfo: GifInfo) -> Unit) {
-        fun onToggle(view: View, gifInfo: GifInfo) {
-            (view as? LottieAnimationView)?.playAnimation()
-            vibrate(view)
+        fun onToggle(favView: View, gifInfo: GifInfo) {
+            vibrate(favView)
             clickListener(gifInfo)
+            gifInfo.isFavourite = gifInfo.isFavourite.not()
+            favouriteMarker(favView as LottieAnimationView, gifInfo.isFavourite)
         }
     }
 }

@@ -29,7 +29,7 @@ data class GifInfo(
     @PrimaryKey @ColumnInfo(name = "id") val id: String,
     @ColumnInfo(name = "title") val title: String?,
     @Embedded(prefix = "gif_") val images: GifImages,
-    var isFavourite: Boolean
+    @ColumnInfo(name = "isFavourite") var isFavourite: Boolean
 )
 
 data class GifImages(

@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
-import com.freshworks.challenge.R
 import com.freshworks.challenge.data.entities.GifInfo
 import com.freshworks.challenge.databinding.FragmentTrendingBinding
 import com.freshworks.challenge.ui.common.LoaderStateAdapter
@@ -19,7 +18,6 @@ import com.freshworks.challenge.ui.trending.adapters.GiphyViewHolder.FavouritesC
 import com.freshworks.challenge.utilities.Constants.GRID_COLUMNS
 import com.freshworks.challenge.utilities.Constants.LIST_COLUMN
 import com.freshworks.challenge.utilities.Constants.PAGE_OFFSET
-import com.freshworks.challenge.utilities.shortToast
 import com.freshworks.challenge.utilities.snapToPosition
 import com.freshworks.challenge.viewmodel.GiphyViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -96,6 +94,8 @@ class TrendingFragment : Fragment() {
     /*Pull To Refresh For Refreshing Gif Data*/
     private fun swipeRefreshGifs() {
         binding.swipeRefresh.setOnRefreshListener {
+            binding.svGifs.setQuery(String(), false)
+            binding.svGifs.clearFocus()
             reloadGifData(String())
         }
     }
@@ -137,7 +137,6 @@ class TrendingFragment : Fragment() {
     private fun onFavouriteClicked(gifInfo: GifInfo) {
         lifecycleScope.launch {
             giphyGifViewModel.toggleFavourites(gifInfo)
-            requireContext().shortToast(getString(R.string.toggle_favourites))
         }
     }
 }
