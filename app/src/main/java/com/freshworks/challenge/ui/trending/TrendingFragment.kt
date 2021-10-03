@@ -22,7 +22,6 @@ import com.freshworks.challenge.utilities.snapToPosition
 import com.freshworks.challenge.viewmodel.GiphyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 /**
@@ -34,7 +33,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class TrendingFragment : Fragment() {
     private lateinit var binding: FragmentTrendingBinding
-    private val giphyGifViewModel: GiphyViewModel by viewModels()
+    private val giphyViewModel: GiphyViewModel by viewModels()
 
     private lateinit var layoutManager: GridLayoutManager
     private lateinit var adapter: GifImageAdapter
@@ -118,7 +117,7 @@ class TrendingFragment : Fragment() {
     /*Function for Fetching Trending Gif Images or Search Gif Images If Search Query Present*/
     private fun fetchGifImages(searchGifs: String) {
         lifecycleScope.launch {
-            giphyGifViewModel.fetchGifImages(searchGifs).distinctUntilChanged().collectLatest {
+            giphyViewModel.fetchGifImages(searchGifs).collectLatest {
                 adapter.submitData(it)
             }
         }
@@ -136,7 +135,7 @@ class TrendingFragment : Fragment() {
     /*Mark/UnMark Gif As Favourites*/
     private fun onFavouriteClicked(gifInfo: GifInfo) {
         lifecycleScope.launch {
-            giphyGifViewModel.toggleFavourites(gifInfo)
+            giphyViewModel.toggleFavourites(gifInfo)
         }
     }
 }

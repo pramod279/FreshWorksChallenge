@@ -17,7 +17,6 @@ import com.freshworks.challenge.utilities.Constants.GRID_COLUMNS
 import com.freshworks.challenge.viewmodel.GiphyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 /**
@@ -29,7 +28,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class FavouritesFragment : Fragment() {
     private lateinit var binding: FragmentFavouritesBinding
-    private val giphyGifViewModel: GiphyViewModel by viewModels()
+    private val giphyViewModel: GiphyViewModel by viewModels()
 
     private lateinit var layoutManager: GridLayoutManager
     private lateinit var adapter: GifImageAdapter
@@ -67,7 +66,7 @@ class FavouritesFragment : Fragment() {
     /*Function for Fetching My Favourite Gif Images*/
     private fun fetchMyFavouriteGifs(adapter: GifImageAdapter) {
         lifecycleScope.launch {
-            giphyGifViewModel.fetchMyFavourites().distinctUntilChanged().collectLatest {
+            giphyViewModel.fetchMyFavourites().collectLatest {
                 adapter.submitData(it)
             }
         }
@@ -76,7 +75,7 @@ class FavouritesFragment : Fragment() {
     /*Mark/UnMark Gif As Favourites*/
     private fun onFavouriteClicked(gifInfo: GifInfo) {
         lifecycleScope.launch {
-            giphyGifViewModel.toggleFavourites(gifInfo)
+            giphyViewModel.toggleFavourites(gifInfo)
         }
     }
 }
