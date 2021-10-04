@@ -58,8 +58,6 @@ class TrendingFragment : Fragment() {
         initGifRecyclerView()
         /*Search for Gifs Using Search View*/
         gifSearcher()
-        /*Fetch Trending Gif Images*/
-        fetchGifImages()
         /*Swipe Refresh Reload Action*/
         swipeRefreshGifs()
         /*Track Data Flow Progress States*/
@@ -114,14 +112,6 @@ class TrendingFragment : Fragment() {
         giphyLayoutManager()
     }
 
-    /*Reload Layout Manager When Search Action Performed*/
-    private fun giphyLayoutManager() {
-        if (searchGifs.isEmpty()) layoutManager.spanCount =
-            GRID_COLUMNS else layoutManager.spanCount = LIST_COLUMN
-        adapter.notifyItemRangeChanged(0, adapter.itemCount)
-        binding.rvGiphy.snapToPosition(0)
-    }
-
     /*Function for Fetching Trending Gif Images or Search Gif Images If Search Query Present*/
     private fun fetchGifImages() {
         lifecycleScope.launch {
@@ -129,6 +119,14 @@ class TrendingFragment : Fragment() {
                 adapter.submitData(it)
             }
         }
+    }
+
+    /*Reload Layout Manager When Search Action Performed*/
+    private fun giphyLayoutManager() {
+        if (searchGifs.isEmpty()) layoutManager.spanCount =
+            GRID_COLUMNS else layoutManager.spanCount = LIST_COLUMN
+        adapter.notifyItemRangeChanged(0, adapter.itemCount)
+        binding.rvGiphy.snapToPosition(0)
     }
 
     /*Mark/UnMark Gif As Favourites*/
@@ -161,5 +159,10 @@ class TrendingFragment : Fragment() {
     private fun showEmptyState() {
         binding.tvError.isVisible = true
         binding.tvError.text = getString(R.string.no_records_found)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        reloadGifData()
     }
 }
