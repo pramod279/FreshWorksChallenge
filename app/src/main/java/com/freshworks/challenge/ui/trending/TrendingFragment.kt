@@ -144,21 +144,21 @@ class TrendingFragment : Fragment() {
                 binding.swipeRefresh.isRefreshing = loadState.refresh is LoadState.Loading
                 // Only show the list if refresh succeeds
                 binding.rvGiphy.isVisible = loadState.refresh is LoadState.NotLoading
-                // Show the error state if initial load or refresh fails
-                binding.tvError.isVisible = loadState.refresh is LoadState.Error
-                binding.tvError.text = getString(R.string.label_error)
+                        || loadState.refresh !is LoadState.Error
                 // Display Empty View For No Records Found*/
-                val isEmptyList =
-                    loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
-                if (isEmptyList) showEmptyState()
+                val isEmptyList = loadState.refresh is LoadState.Error
+                        || loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
+                binding.tvError.isVisible = isEmptyList
+                if (isEmptyList) showEmptyState(loadState.refresh)
             }
         }
     }
 
-    /*Function for Displaying Empty View*/
-    private fun showEmptyState() {
-        binding.tvError.isVisible = true
+    /*Function for Displaying Empty State With Message*/
+    private fun showEmptyState(loadState: LoadState) {
         binding.tvError.text = getString(R.string.no_records_found)
+        // Show the error state if initial load or refresh fails
+        if (loadState is LoadState.Error) binding.tvError.text = getString(R.string.label_error)
     }
 
     override fun onResume() {
